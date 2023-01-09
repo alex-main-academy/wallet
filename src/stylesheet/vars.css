@@ -1,0 +1,21 @@
+/* global vars */
+
+:root {
+    /* text colors */
+    --primary-text-color: rgba(0, 0, 0, 1);
+    --secondary-text-color: rgba(255, 255, 255, 1);
+    --blue-text-color: rgba(74, 86, 226, 1);
+    --red-text-color: rgba(255, 101, 150, 1);
+    --green-text-color: rgba(36, 204, 167, 1);
+    --gray-text-color: rgba(189, 189, 189, 1);
+
+    /* backgrounds colors */
+    --primary-back-color: rgba(255, 255, 255, 1);
+    --secondary-back-color: rgba(255, 255, 255, 0.4);
+    --green-back-color: rgba(36, 204, 167, 1);
+    --blue-back-color: rgba(74, 86, 226, 1);
+
+    /* fonts */
+    --primary-font: 'Circe';
+    --secondary-font: 'Poppins';
+}

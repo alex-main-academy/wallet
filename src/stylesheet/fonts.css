@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url(../assets/fonts/Poppins-Regular.ttf) format(ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url(../assets/fonts/Poppins-Bold.ttf) format(ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Circe';
+    src: url(../assets/fonts/CirceRegular.ttf) format(ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Circe';
+    src: url(../assets/fonts/CirceBold.ttf) format(ttf);
+    font-weight: bold;
+}
