@@ -1,0 +1,169 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+.registration_page {
+  height: 100vh;
+  background-image: url('./images/bkg-img-mac.png'),
+    url('./images/left-elipse-mac.png'), url('./images/right-elipse-mac.png'),
+    linear-gradient(90deg, #e7eaf2 40%, #f1f3f8 0);
+  background-repeat: no-repeat;
+  background-position: left 76px center, left 0 bottom 0, top 0 right 0,
+    center center;
+  background-size: 452px, 444px, 602px, cover;
+}
+.wallet_img {
+  width: 40px;
+  height: 40px;
+}
+
+.title {
+  font-family: var(--secondary-font);
+  color: var(--secondary-text-color);
+  font-size: 30px;
+  line-height: 1.5;
+  position: absolute;
+  left: 220px;
+  top: calc(50% + 240px);
+}
+
+.form_title {
+  font-family: var(--secondary-font);
+  color: var(--primary-text-color);
+  font-weight: 700;
+  line-height: 1.5;
+  font-size: 30px;
+}
+.title_wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+.form_wrapper {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  width: 533px;
+  height: 616px;
+  padding: 40px 62px 66px 62px;
+  position: absolute;
+  right: 91px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input {
+  height: 32px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  padding-left: 54px;
+  padding-right: 54px;
+}
+.input::placeholder {
+  color: #bdbdbd;
+  font-size: 18px;
+  font-family: var(--primary-font);
+  line-height: 1.5;
+}
+.input_wrapper {
+  position: relative;
+}
+.register_btn {
+  width: 300px;
+  height: 50px;
+  border: 0;
+  align-self: center;
+  background: #24cca7;
+  border-radius: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: var(--primary-font);
+  letter-spacing: 0.1em;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.login_btn {
+  width: 299px;
+  height: 50px;
+  align-self: center;
+  border-radius: 20px;
+  border: 1px solid #4a56e2;
+  color: #4a56e2;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-family: var(--primary-font);
+  letter-spacing: 0.1em;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.ico {
+  width: 24px;
+  height: 24px;
+  color: #e0e0e0;
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+@media screen and (max-width: 1247px) {
+  .registration_page {
+    background-color: #e7eaf2;
+    background-image: url('./images/bkg-img-tab.png'),
+      url('./images/left-elipse-mac.png'), url('./images/right-elipse-mac.png');
+    background-repeat: no-repeat;
+    background-position: calc(50% - 110px) 60px, left 0 bottom 0, top 0 right 0;
+    background-size: 273px, 480px, 369px;
+  }
+  .title {
+    color: var(--primary-text-color);
+    position: absolute;
+    top: 147px;
+    left: calc(50% + 50px);
+  }
+  .form_wrapper {
+    top: 360px;
+    right: 50%;
+    transform: translateX(+50%);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .registration_page {
+    background: none;
+  }
+  .title {
+    display: none;
+  }
+  .wallet_img {
+    width: 30px;
+    height: 30px;
+  }
+  .form_title {
+    font-size: 25px;
+  }
+  .form_wrapper {
+    top: 0;
+    right: 50%;
+    padding: 0;
+    transform: translate(50%, 0);
+    width: 280px;
+  }
+  .register_btn {
+    width: 280px;
+  }
+  .login_btn {
+    width: 280px;
+  }
+}
