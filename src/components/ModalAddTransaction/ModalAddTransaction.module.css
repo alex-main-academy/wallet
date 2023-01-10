@@ -1,62 +1,65 @@
-.form {
-  margin-top: 15px;
-  width: 300px;
-
-}
-.wrappen {
-  width: 80px;
-  height: 40px;
-background: #FFFFFF;
-border: 1px solid #E0E0E0;
-border-radius: 30px;
+.modal {
+  position: fixed;
+  margin: 0 auto;
+  max-width: 540px;
+  height: 603px;
+  background-color: var(--primary-back-color);
+  border-radius: 20px;
+  padding: 40px 80px;
 }
 
-.formTitle {
-font-family: 'Poppins';
-font-size: 30px;
-line-height: 1.5;
-display: flex;
-align-items: center;
-text-align: center;
-color: #000000;
-margin-bottom: 40px;
+.modalIncome {
+  position: fixed;
+  margin: 0 auto;
+  max-width: 540px;
+  height: 508px;
+  background-color: var(--primary-back-color);
+  border-radius: 20px;
+  padding: 40px 80px;
 }
 
-.typeIncome {
-font-family: 'Circe';
-font-weight: 700;
-font-size: 16px;
-line-height: 1.5;
-text-align: right;
-color: #E0E0E0;
-}
-
-.typeExpense {
-font-family: 'Circe';
-font-weight: 700;
-font-size: 16px;
-line-height: 1.5;
-color: #FF6596;
+.transactionAddIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
 }
 
 
-.label {
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-  line-height: 1.15;
-  letter-spacing: 0.01em;
-  margin-bottom: 15px;
 
+.modalTitle {
+  font-family: var(--secondary-font);
+  font-size: 30px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--primary-text-color);
+  margin-bottom: 35px;
 }
 
 
 .formInputSum {
- text-align: center;
+  width: 190px;
+  font-weight: 700;
+  text-align: center;
 }
 
-
-
+.modalSelect {
+  width: 100%;
+  margin-bottom: 40px;
+  font-size: 15px;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  padding: 8px 10px;
+  outline: transparent;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: var(--primary-font);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--gray-text-color);
+}
 
 input {
   width: 100%;
@@ -67,41 +70,152 @@ input {
   cursor: pointer;
   padding: 8px 10px;
   outline: transparent;
-  border:none;
-  border-bottom:  1px solid #E0E0E0;
-
-}
-
-
-.btn {
-width: 300px;
-height: 50px;
-margin-bottom: 20px;
-font-family: 'Circe';
-font-size: 18px;
-line-height: 1.5;
-text-align: center;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: #4A56E2;
-background: #FFFFFF;
-border: 1px solid #4A56E2;
-border-radius: 20px;
-cursor: pointer;
-padding: 13px 65px 13px 71px;
-}
-
-
-.btn:hover, .btn:focus {
-background: #24CCA7;
-color: #FFFFFF;
-border: transparent;
-cursor: pointer;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 input::placeholder {
-font-family: 'Circe';
-font-size: 18px;
-line-height: 1.5;
-color: #BDBDBD;
+  font-family: var(--primary-font);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--gray-text-color);
 }
+
+.modalWrapper {
+  display: flex;
+  gap: 32px;
+}
+.inputDatetime {
+  position: relative;
+  width: 181px;
+}
+
+.calendarIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.btn {
+  width: 300px;
+  display: block;
+  margin: 0 auto 20px auto;
+  font-family: var(--primary-font);
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-text-color);
+  background: var(--primary-back-color);
+  border: 1px solid var(--blue-back-color);
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 13px 65px 13px 71px;
+}
+
+.btn:hover,
+.btn:focus {
+  background: var(--green-back-color);
+  color: var(--secondary-text-color);
+  border: transparent;
+  cursor: pointer;
+}
+
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+  border-radius: 30px;
+}
+.toggleSwitch input[type="checkbox"] {
+  display: none;
+}
+.toggleSwitch .switch {
+  position: absolute;
+  cursor: pointer;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 25px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: background-color 0.2s ease;
+}
+.toggleSwitch .switch::before {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: -2px;
+  width: 44px;
+  height: 44px;
+  background:  #FF6596;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  background-image: url(../ModalAddTransaction/images/expense.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.toggleSwitch input[type="checkbox"]:checked + .switch::before {
+  transform: translateX(-35px);
+  background-color: #24CCA7;
+  background-image: url(../ModalAddTransaction/images/income.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.modalTransaction {
+font-family: 'Circe';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+text-align: right;
+color: #24CCA7;
+}
+
+.modalTransactionIncome {
+  font-family: var(--primary-font);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: right;
+  color: #e0e0e0;
+}
+
+.modalTransactionExpense {
+  font-family: var(--primary-font);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+.activeTransactionExpense{
+  font-family: var(--primary-font);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color:#FF6596;
+}
+
+.activeTransactionIncome{
+  font-family: var(--primary-font);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: right;
+  color:#24CCA7;
+}
+.modalWrappenTransaction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+

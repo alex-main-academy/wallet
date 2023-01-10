@@ -41,6 +41,7 @@ const LoginPage = () => {
           <button className={styles.login_btn}>Register</button>
         </div>
       </div>
+
     </div>
   );
 };
