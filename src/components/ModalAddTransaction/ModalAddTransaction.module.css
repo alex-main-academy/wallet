@@ -3,6 +3,14 @@
   width: 300px;
 
 }
+.wrappen {
+  width: 80px;
+  height: 40px;
+background: #FFFFFF;
+border: 1px solid #E0E0E0;
+border-radius: 30px;
+}
+
 .formTitle {
 font-family: 'Poppins';
 font-size: 30px;
@@ -10,8 +18,8 @@ line-height: 1.5;
 display: flex;
 align-items: center;
 text-align: center;
-
 color: #000000;
+margin-bottom: 40px;
 }
 
 .typeIncome {
@@ -43,21 +51,25 @@ color: #FF6596;
 }
 
 
-.formInput {
+.formInputSum {
+ text-align: center;
+}
+
+
+
+
+input {
   width: 100%;
-  padding-left: 10px;
-  padding-right: 10px;
   margin-bottom: 40px;
   font-size: 15px;
   line-height: 1.15;
   letter-spacing: 0.01em;
-  border-bottom:  1px solid #E0E0E0;
   cursor: pointer;
-
-}
-
-input {
+  padding: 8px 10px;
   outline: transparent;
+  border:none;
+  border-bottom:  1px solid #E0E0E0;
+
 }
 
 
