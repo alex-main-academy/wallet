@@ -1,10 +1,27 @@
 import styles from './LoginPage.module.css';
-
+import { userSchema } from './user_validation';
 import { MdEmail } from 'react-icons/md';
 import { AiFillLock } from 'react-icons/ai';
-import { BsPersonFill } from 'react-icons/bs';
+import { useState } from 'react';
 
 const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const formData = {
+      email,
+      password,
+    };
+
+    const isValid = await userSchema.isValid(formData);
+
+    if (isValid) {
+      setEmail('');
+      setPassword('');
+    }
+  };
   return (
     <div className={styles.registration_page}>
       <div className="container">
@@ -19,7 +36,7 @@ const LoginPage = () => {
             <h2 className={styles.form_title}>Wallet</h2>
           </div>
 
-          <form className={styles.form}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.input_wrapper}>
               <MdEmail className={styles.ico} />
               <input

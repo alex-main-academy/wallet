@@ -117,6 +117,22 @@
   left: 10px;
 }
 
+.progress {
+  height: 4px;
+  background-color: #e5f1ef;
+  box-shadow: 0px 1px 8px rgba(36, 204, 167, 0.5);
+  border-radius: 5px;
+  position: absolute;
+  width: 409px;
+  bottom: -8px;
+  left: 0;
+}
+.progress_bar {
+  height: 4px;
+  background-color: #24cca7;
+  border-radius: 5px;
+}
+
 @media screen and (max-width: 1247px) {
   .registration_page {
     background-color: #e7eaf2;
@@ -164,6 +180,9 @@
     width: 280px;
   }
   .login_btn {
+    width: 280px;
+  }
+  .progress {
     width: 280px;
   }
 }
