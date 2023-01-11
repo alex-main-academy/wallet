@@ -6,7 +6,6 @@ import HomeTab from './HomeTab/HomeTab';
 import DiagramTab from './DiagramTab/DiagramTab';
 import Currency from './Currency/Currency';
 import { useDispatch } from 'react-redux';
-import { useAuth } from 'hooks/useAuth';
 import { useEffect } from 'react';
 import { refreshUser } from 'redux/auth/authOperations';
 
