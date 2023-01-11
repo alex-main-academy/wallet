@@ -4,7 +4,7 @@ import btnAddTransactions from '../ButtonAddTransactions/image/btnAddTransaction
 const ButtonAddTransactions = () => {
 
   return (
-    <button type="button" className={css.btnAdd} >
+    <button className={css.btnAdd} >
       <img className={css.btnIcon} src={btnAddTransactions} alt="calendar"/>
     </button>
   );
