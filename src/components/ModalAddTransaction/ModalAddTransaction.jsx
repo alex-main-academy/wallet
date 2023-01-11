@@ -60,8 +60,8 @@ const ModalAddTransaction = ({ addTransaction }) => {
           )}
         </div>
         {!isToggled && (
-          <select className={css.modalSelect}>
-            <option value="" disabled selected hidden>
+          <select className={css.modalSelect} defaultValue="Select a category">
+            <option disabled hidden>
               Select a category
             </option>
           </select>
@@ -85,7 +85,8 @@ const ModalAddTransaction = ({ addTransaction }) => {
             <img className={css.calendarIcon} src={calendar} alt="calendar" />
           </div>
         </div>
-        <input className={css.inputCommentText}
+        <input
+          className={css.inputCommentText}
           type="text"
           name="comment"
           value={comment}
