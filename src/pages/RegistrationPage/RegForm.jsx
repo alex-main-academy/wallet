@@ -6,8 +6,15 @@ import { BsPersonFill } from 'react-icons/bs';
 import PasswordStrengthMeter from './PasswordStrengthMeter';
 import { userSchema } from './user_validation';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { register } from 'redux/auth/authOperations';
+import { useDispatch } from 'react-redux';
+import { useAuth } from 'hooks/useAuth';
+import { StyledLink } from './RegPage.styled';
 
 export default function RegForm() {
+  const dispatch = useDispatch();
+  const { error } = useAuth();
+
   const handleChange = ({ target }) => {
     if (target.name === 'password') {
       setPassword(target.value);
@@ -24,7 +31,14 @@ export default function RegForm() {
       }}
       validationSchema={userSchema}
       onSubmit={(values, { resetForm }) => {
-        console.log(values);
+        dispatch(
+          register({
+            username: values.name,
+            email: values.email,
+            password: values.password,
+          })
+        );
+
         resetForm();
       }}
     >
@@ -103,9 +117,8 @@ export default function RegForm() {
                 Register
               </button>
             </div>
-            <button className={styles.login_btn} type="button">
-              Log in
-            </button>
+            <StyledLink to="/">Log in</StyledLink>
+            {error && <p>{error}</p>}
           </div>
         </Form>
       )}

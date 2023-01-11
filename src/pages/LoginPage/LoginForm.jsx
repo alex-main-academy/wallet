@@ -3,8 +3,15 @@ import { MdEmail } from 'react-icons/md';
 import { AiFillLock } from 'react-icons/ai';
 import { userSchema } from './user_validation';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/authOperations';
+import { useAuth } from 'hooks/useAuth';
+import { StyledLink } from './LoginPage.styled';
 
 export default function LoginForm() {
+  const { error } = useAuth();
+  const dispatch = useDispatch();
+
   return (
     <Formik
       initialValues={{
@@ -15,7 +22,12 @@ export default function LoginForm() {
       }}
       validationSchema={userSchema}
       onSubmit={(values, { resetForm }) => {
-        console.log(values);
+        dispatch(
+          logIn({
+            email: values.email,
+            password: values.password,
+          })
+        );
         resetForm();
       }}
     >
@@ -64,9 +76,8 @@ export default function LoginForm() {
                 Log in
               </button>
             </div>
-            <button className={styles.login_btn} type="button">
-              Register
-            </button>
+            <StyledLink to="/registration">Register</StyledLink>
+            {error && <p>{error}</p>}
           </div>
         </Form>
       )}

@@ -93,8 +93,9 @@
   letter-spacing: 0.1em;
   font-size: 18px;
   line-height: 1.5;
+  cursor: pointer;
 }
-.login_btn {
+/* .login_btn {
   width: 299px;
   height: 50px;
   align-self: center;
@@ -107,7 +108,8 @@
   letter-spacing: 0.1em;
   font-size: 18px;
   line-height: 1.5;
-}
+  cursor: pointer;
+} */
 .ico {
   width: 24px;
   height: 24px;
@@ -179,9 +181,7 @@
   .register_btn {
     width: 280px;
   }
-  .login_btn {
-    width: 280px;
-  }
+
   .progress {
     width: 280px;
   }
