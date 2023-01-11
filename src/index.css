@@ -11,21 +11,21 @@ body {
 }
 
 .container {
-  max-width: 1248px;
+  max-width: 1280px;
   padding: 0 16px;
   margin: 0 auto;
 }
 
-@media screen and (max-width:1247px) {
+@media screen and (max-width:1279px) {
   .container {
-    max-width: 704px;
+    max-width: 768px;
     padding: 0 32px;
   }
 }
 
 @media screen and (max-width:767px) {
   .container {
-    max-width: 278px;
-    padding: 0 21px;
+    max-width: 320px;
+    padding: 0 20px;
   }
 }
