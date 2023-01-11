@@ -21,5 +21,7 @@ export const StyledLink = styled(NavLink)`
 
   & svg {
     fill: rgba(110, 120, 232, 1);
+    background-color: rgb(255, 255, 255);
+    border-radius: 6px;
   }
 `;
