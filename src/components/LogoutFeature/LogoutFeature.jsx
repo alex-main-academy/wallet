@@ -37,7 +37,10 @@ export default function LogoutBtn() {
               Cancel
             </button>
             <button
-              onClick={() => dispatch(logOut())}
+              onClick={() => {
+                dispatch(logOut());
+                setModalShown(false);
+              }}
               style={{ backgroundColor: '#24cca7', color: '#fff' }}
               className={styles.modal_btn}
               type="button"
