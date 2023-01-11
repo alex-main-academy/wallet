@@ -1,64 +1,105 @@
 .modal {
   position: relative;
   margin: 0 auto;
-  max-width: 540px;
-  height: 603px;
+  max-width: 320px;
+  height: 710px;
   background-color: var(--primary-back-color);
-  border-radius: 20px;
-  padding: 40px 80px;
+  padding: 20px 11px 37px 9px;
 }
-
-.modalIncome {
-  position: fixed;
-  margin: 0 auto;
-  max-width: 540px;
-  height: 508px;
-  background-color: var(--primary-back-color);
-  border-radius: 20px;
-  padding: 40px 80px;
-}
-
-.transactionAddIcon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 44px;
-  height: 44px;
-}
-
-
 
 .modalTitle {
   font-family: var(--secondary-font);
-  font-size: 30px;
+  font-size: 24px;
   line-height: 1.5;
   text-align: center;
   color: var(--primary-text-color);
-  margin-bottom: 35px;
-}
-
-
-.formInputSum {
-  width: 190px;
-  font-weight: 700;
-  text-align: center;
-}
-
-.modalSelect {
-  width: 100%;
   margin-bottom: 40px;
-  font-size: 15px;
-  line-height: 1.15;
-  letter-spacing: 0.01em;
-  cursor: pointer;
-  padding: 8px 10px;
-  outline: transparent;
-  border: none;
-  border-bottom: 1px solid #e0e0e0;
+}
+
+.modalWrappenTransaction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.modalTransactionIncome {
   font-family: var(--primary-font);
-  font-size: 18px;
+  font-weight: 700;
+  font-size: 16px;
   line-height: 1.5;
-  color: var(--gray-text-color);
+  text-align: right;
+  color: #e0e0e0;
+}
+
+.modalTransactionExpense {
+  font-family: var(--primary-font);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+
+.activeTransactionIncome {
+  font-family: var(--primary-font);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: right;
+  color: var(--green-text-color);
+}
+
+.activeTransactionExpense {
+  font-family: var(--primary-font);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--red-text-color);
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+  border-radius: 30px;
+}
+.toggleSwitch input[type='checkbox'] {
+  display: none;
+}
+.toggleSwitch .switch {
+  position: absolute;
+  cursor: pointer;
+  background: var(--primary-back-color);
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: background-color 0.2s ease;
+}
+.toggleSwitch .switch::before {
+  position: absolute;
+  content: '';
+  right: 0;
+  top: -2px;
+  width: 44px;
+  height: 44px;
+  background: var(--red-text-color);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  background-image: url(../ModalAddTransaction/images/expense.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.toggleSwitch input[type='checkbox']:checked + .switch::before {
+  transform: translateX(-35px);
+  background-color: var(--green-text-color);
+  background-image: url(../ModalAddTransaction/images/income.svg);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 input {
@@ -81,13 +122,29 @@ input::placeholder {
   color: var(--gray-text-color);
 }
 
-.modalWrapper {
-  display: flex;
-  gap: 32px;
+.modalSelect {
+  width: 100%;
+  margin-bottom: 40px;
+  font-family: var(--primary-font);
+  font-size: 18px;
+  line-height: 1.5;
+  cursor: pointer;
+  padding: 8px 10px;
+  outline: transparent;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  color: var(--gray-text-color);
 }
+
+.formInputSum {
+  font-family: var(--primary-font);
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
 .inputDatetime {
   position: relative;
-  width: 181px;
 }
 
 .calendarIcon {
@@ -98,10 +155,14 @@ input::placeholder {
   height: 24px;
 }
 
-.btn {
+.inputCommentText {
+  height: 84px;
+}
+
+.btnCancel {
   width: 300px;
   display: block;
-  margin: 0 auto 20px auto;
+  margin: 0 auto;
   font-family: var(--primary-font);
   font-size: 18px;
   line-height: 1.5;
@@ -116,106 +177,54 @@ input::placeholder {
   padding: 13px 65px 13px 71px;
 }
 
-.btn:hover,
-.btn:focus {
-  background: var(--green-back-color);
+.btnAdd {
+  width: 300px;
+  display: block;
+  margin: 0 auto 20px auto;
+  font-family: var(--primary-font);
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--secondary-text-color);
+  background: var(--green-back-color);
+  border: 1px solid var(--blue-back-color);
+  border-radius: 20px;
   border: transparent;
   cursor: pointer;
+  padding: 13px 65px 13px 71px;
 }
 
+@media screen and (min-width: 767px) {
+  .modal {
+    max-width: 540px;
+    height: 603px;
+    background-color: var(--primary-back-color);
+    border-radius: 20px;
+    padding: 40px 80px;
+  }
 
-.toggleSwitch {
-  position: relative;
-  display: inline-block;
-  width: 80px;
-  height: 40px;
-  border-radius: 30px;
-}
-.toggleSwitch input[type="checkbox"] {
-  display: none;
-}
-.toggleSwitch .switch {
-  position: absolute;
-  cursor: pointer;
-  background: #FFFFFF;
-  border: 1px solid #E0E0E0;
-  border-radius: 25px;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transition: background-color 0.2s ease;
-}
-.toggleSwitch .switch::before {
-  position: absolute;
-  content: "";
-  right: 0;
-  top: -2px;
-  width: 44px;
-  height: 44px;
-  background:  #FF6596;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  background-image: url(../ModalAddTransaction/images/expense.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.toggleSwitch input[type="checkbox"]:checked + .switch::before {
-  transform: translateX(-35px);
-  background-color: #24CCA7;
-  background-image: url(../ModalAddTransaction/images/income.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-}
+  .modalTitle {
+    font-size: 30px;
+  }
 
-.modalTransaction {
-font-family: 'Circe';
-font-style: normal;
-font-weight: 700;
-font-size: 16px;
-line-height: 24px;
-text-align: right;
-color: #24CCA7;
-}
+  .formInputSum {
+    width: 190px;
+    text-align: center;
+  }
 
-.modalTransactionIncome {
-  font-family: var(--primary-font);
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.5;
-  text-align: right;
-  color: #e0e0e0;
-}
+  .inputDatetime {
+    width: 181px;
+  }
 
-.modalTransactionExpense {
-  font-family: var(--primary-font);
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #e0e0e0;
-}
-.activeTransactionExpense{
-  font-family: var(--primary-font);
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.5;
-  color:#FF6596;
-}
+  .modalWrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 32px;
+  }
 
-.activeTransactionIncome{
-  font-family: var(--primary-font);
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.5;
-  text-align: right;
-  color:#24CCA7;
+  .inputCommentText {
+    height: 32px;
+  }
 }
-.modalWrappenTransaction {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 40px;
-}
-
