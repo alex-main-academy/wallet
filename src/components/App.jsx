@@ -13,7 +13,6 @@ import { refreshUser } from 'redux/auth/authOperations';
 export const App = () => {
   const dispatch = useDispatch();
   //для відображення потім шо сторінка загружається
-  const { isRefreshing } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
