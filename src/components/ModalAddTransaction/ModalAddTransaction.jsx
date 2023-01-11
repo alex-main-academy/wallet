@@ -1,7 +1,8 @@
 import css from './ModalAddTransaction.module.css';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
-import calendar from '../ModalAddTransaction/images/calendar.svg';
+import calendar from './images/calendar.svg';
+import modalCloseIcon from './images/close.svg'
 import { useState } from 'react';
 
 const ModalAddTransaction = ({ addTransaction }) => {
@@ -10,6 +11,7 @@ const ModalAddTransaction = ({ addTransaction }) => {
   const [isToggled, setIsToggled] = useState(false);
   const [date, setDate] = useState(new Date());
   const onToggle = () => setIsToggled(!isToggled);
+
 
   const handleNameChange = e => {
     const { name, value } = e.target;
@@ -39,8 +41,14 @@ const ModalAddTransaction = ({ addTransaction }) => {
     setDate(new Date());
   };
 
+
+
   return (
-    <div className={css.modal} onSubmit={handlerSubmit}>
+    <div className={css.overlay}>
+    <div className={css.modal} onSubmit={handlerSubmit} >
+      <div className={css.modalClose}>
+        <img className={css.modalCloseIcon} src={modalCloseIcon} alt="close"/>
+      </div>
       <h2 className={css.modalTitle}>Add transaction</h2>
       <form className={css.modalForm}>
         <div className={css.modalWrappenTransaction}>
@@ -96,6 +104,7 @@ const ModalAddTransaction = ({ addTransaction }) => {
         <button className={css.btnAdd}>Add </button>
         <button className={css.btnCancel}>Cancel</button>
       </form>
+      </div>
     </div>
   );
 };

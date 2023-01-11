@@ -5,6 +5,27 @@
   height: 710px;
   background-color: var(--primary-back-color);
   padding: 20px 11px 37px 9px;
+  z-index: 100;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.25);;
+  z-index: 1040;
+}
+
+.modalCloseIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 16px;
+  height: 16px;
 }
 
 .modalTitle {
