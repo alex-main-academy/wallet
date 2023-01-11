@@ -5,8 +5,17 @@ import RegistrationPage from 'pages/RegistrationPage/RegistrationPage';
 import HomeTab from './HomeTab/HomeTab';
 import DiagramTab from './DiagramTab/DiagramTab';
 import Currency from './Currency/Currency';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { refreshUser } from 'redux/auth/authOperations';
 
 export const App = () => {
+  const dispatch = useDispatch();
+  //для відображення потім шо сторінка загружається
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
   return (
     <>
       <Routes>
