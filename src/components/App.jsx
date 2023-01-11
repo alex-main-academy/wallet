@@ -4,6 +4,7 @@ import LoginPage from 'pages/LoginPage/LoginPage';
 import RegistrationPage from 'pages/RegistrationPage/RegistrationPage';
 import HomeTab from './HomeTab/HomeTab';
 import DiagramTab from './DiagramTab/DiagramTab';
+import Currency from './Currency/Currency';
 
 export const App = () => {
   return (
@@ -14,6 +15,7 @@ export const App = () => {
         <Route path="dashboard" element={<DashboardPage />}>
           <Route index element={<HomeTab />} />
           <Route path="statistics" element={<DiagramTab />} />
+          <Route path="currency" element={<Currency />} />
         </Route>
         <Route path="*" element={<>Error... this page is not found</>} />
       </Routes>
