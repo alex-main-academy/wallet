@@ -186,3 +186,18 @@
     width: 280px;
   }
 }
+
+.invalid_feedback {
+  position: absolute;
+  color: red;
+  font-size: 0.9rem;
+  top: 35px;
+  left: 50px;
+}
+.invalid_feedback_password {
+  position: absolute;
+  color: red;
+  font-size: 0.9rem;
+  top: 45px;
+  left: 50px;
+}

@@ -1,63 +1,12 @@
 import styles from './LoginPage.module.css';
-import { userSchema } from './user_validation';
-import { MdEmail } from 'react-icons/md';
-import { AiFillLock } from 'react-icons/ai';
-import { useState } from 'react';
+import LoginForm from './LoginForm';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const formData = {
-      email,
-      password,
-    };
-
-    const isValid = await userSchema.isValid(formData);
-
-    if (isValid) {
-      setEmail('');
-      setPassword('');
-    }
-  };
   return (
     <div className={styles.registration_page}>
       <div className="container">
         <h1 className={styles.title}>Finance App</h1>
-        <div className={styles.form_wrapper}>
-          <div className={styles.title_wrapper}>
-            <img
-              className={styles.wallet_img}
-              src={require('../RegistrationPage/images/icon.png')}
-              alt="wallet"
-            />
-            <h2 className={styles.form_title}>Wallet</h2>
-          </div>
-
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.input_wrapper}>
-              <MdEmail className={styles.ico} />
-              <input
-                placeholder="E-mail"
-                className={styles.input}
-                type="email"
-              />
-            </div>
-            <div className={styles.input_wrapper}>
-              <AiFillLock className={styles.ico} />
-              <input
-                placeholder="Password"
-                className={styles.input}
-                type="password"
-              />
-            </div>
-
-            <button className={styles.register_btn}>Log in</button>
-          </form>
-          <button className={styles.login_btn}>Register</button>
-        </div>
+        <LoginForm />
       </div>
     </div>
   );
