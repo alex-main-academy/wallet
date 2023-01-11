@@ -1,0 +1,41 @@
+.balance {
+    margin-bottom: 32px;
+    padding: 8px 0 11px 40px;
+    background-color: #FFFFFF;
+    width: 395px;
+    border-radius: 30px;
+}
+
+@media screen and (max-width:1280px) {
+    .balance {
+        width: 336px;
+        padding: 8px 0 11px 32px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .balance {
+        width: 100%;
+    }
+}
+
+.balance__title {
+    display: block;
+    color: var(--gray-text-color);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+@media screen and (max-width:768px) {
+    .balance__title {
+        font-size: 12px;
+    }
+}
+
+
+.balance__sum {
+    margin: 0;
+    font-family: var(--secondary-font);
+    font-weight: 700;
+    font-size: 30px;
+}
