@@ -2,6 +2,7 @@ import styles from './LoginPage.module.css';
 
 import { MdEmail } from 'react-icons/md';
 import { AiFillLock } from 'react-icons/ai';
+import ButtonAddTransactions from 'components/ButtonAddTransactions/ButtonAddTransactions';
 
 const LoginPage = () => {
   return (
@@ -40,6 +41,7 @@ const LoginPage = () => {
           <button className={styles.login_btn}>Register</button>
         </div>
       </div>
+      <ButtonAddTransactions/>
     </div>
 
   );
