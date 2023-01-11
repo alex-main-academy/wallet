@@ -35,13 +35,13 @@ const LoginPage = () => {
                 type="password"
               />
             </div>
-
             <button className={styles.register_btn}>Log in</button>
           </form>
           <button className={styles.login_btn}>Register</button>
         </div>
       </div>
     </div>
+
   );
 };
 
