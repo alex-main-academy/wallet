@@ -5,7 +5,7 @@ import { logOut } from 'redux/auth/authOperations';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
-export default function LogoutBtn() {
+export default function LogoutFeature() {
   const dispatch = useDispatch(logOut);
   const [modalShown, setModalShown] = useState(false);
 
