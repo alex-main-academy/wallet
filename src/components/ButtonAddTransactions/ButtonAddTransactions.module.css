@@ -3,8 +3,16 @@
   background-color: transparent;
   cursor: pointer;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 0;
+  right: 0;
 
+}
+
+@media screen and (min-width: 767px) {
+  .btnAdd {
+    bottom: 20px;
+    right: 20px;
+
+  }
 }
 

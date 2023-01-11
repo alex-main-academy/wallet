@@ -82,7 +82,7 @@ const ModalAddTransaction = ({ addTransaction }) => {
               value={date}
               onChange={handleChangeDate}
             />
-            <img className={css.calendarIcon} src={calendar} alt="" />
+            <img className={css.calendarIcon} src={calendar} alt="calendar" />
           </div>
         </div>
         <input className={css.inputCommentText}

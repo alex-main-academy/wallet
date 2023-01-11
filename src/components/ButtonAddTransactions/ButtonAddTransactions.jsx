@@ -5,7 +5,7 @@ const ButtonAddTransactions = () => {
 
   return (
     <button type="button" className={css.btnAdd} >
-      <img className={css.btnIcon} src={btnAddTransactions} alt=""/>
+      <img className={css.btnIcon} src={btnAddTransactions} alt="calendar"/>
     </button>
   );
 };

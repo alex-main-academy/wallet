@@ -3,6 +3,7 @@ import styles from './LoginPage.module.css';
 import { MdEmail } from 'react-icons/md';
 import { AiFillLock } from 'react-icons/ai';
 import ModalAddTransaction from 'components/ModalAddTransaction/ModalAddTransaction';
+import ButtonAddTransactions from 'components/ButtonAddTransactions/ButtonAddTransactions';
 
 const LoginPage = () => {
   return (
@@ -43,6 +44,7 @@ const LoginPage = () => {
         </div>
       </div>
 <ModalAddTransaction/>
+<ButtonAddTransactions/>
     </div>
   );
 };
