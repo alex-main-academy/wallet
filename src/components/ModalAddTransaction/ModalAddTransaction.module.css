@@ -1,5 +1,5 @@
 .modal {
-  position: fixed;
+  position: relative;
   margin: 0 auto;
   max-width: 540px;
   height: 603px;
