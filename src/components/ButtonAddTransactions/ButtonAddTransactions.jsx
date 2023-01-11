@@ -3,12 +3,8 @@ import btnAddTransactions from '../ButtonAddTransactions/image/btnAddTransaction
 
 const ButtonAddTransactions = () => {
 
-  const shoot = () => {
-    alert("Great Shot!");
-  }
-
   return (
-    <button type="button" className={css.btnAdd} onClick={shoot} >
+    <button type="button" className={css.btnAdd} >
       <img className={css.btnIcon} src={btnAddTransactions} alt=""/>
     </button>
   );

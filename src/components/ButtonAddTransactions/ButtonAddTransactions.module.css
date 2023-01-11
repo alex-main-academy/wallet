@@ -3,12 +3,8 @@
   background-color: transparent;
   cursor: pointer;
   position: fixed;
-  bottom: 40px;
-  right: 40px;
+  bottom: 20px;
+  right: 20px;
 
 }
 
-.btnIcon {
-  width: 44px;
-  height: 44px;
-}
