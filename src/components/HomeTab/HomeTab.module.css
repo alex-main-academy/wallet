@@ -173,6 +173,11 @@ table.tablePositive tr:last-child > td:first-child {
 }
 
 
+table.tableNegative tr:not(:first-child, :last-child) {
+  box-shadow: inset 4px 0px 0px rgb(255, 102, 150);
+}
+
+
 td.positive {
   color: rgb(36, 204, 167);
 }
@@ -221,4 +226,8 @@ td.negative {
 .scrollTableBtnMob:hover,
 .scrollTableBtnMob:focus {
   opacity: 1;
+}
+
+.noTransactionMob {
+  text-align: center;
 }

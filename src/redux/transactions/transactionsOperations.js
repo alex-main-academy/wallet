@@ -9,7 +9,7 @@ export const fetchTransactions = createAsyncThunk(
     async (_, { rejectWithValue }) => {
       try {
         const { data } = await axios('/api/transactions');
-  
+
         return data;
       } catch (error) {
         return rejectWithValue(error.message);
@@ -29,7 +29,7 @@ export const addTransaction = createAsyncThunk(
       }
     }
   );
-  
+
   //видалення транзакції
   export const deleteTransaction = createAsyncThunk(
     'transaction/deleteTransaction',
@@ -55,3 +55,4 @@ export const addTransaction = createAsyncThunk(
       }
     }
   );
+

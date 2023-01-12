@@ -1,10 +1,11 @@
 import css from './ModalAddTransaction.module.css';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
-import calendar from '../ModalAddTransaction/images/calendar.svg';
+import calendar from './images/calendar.svg';
+import modalCloseIcon from './images/close.svg';
 import { useState } from 'react';
 
-const ModalAddTransaction = ({ addTransaction }) => {
+const ModalAddTransaction = ({ addTransaction, onClose, onClickBackdrop }) => {
   const [sum, setSum] = useState('');
   const [comment, setComment] = useState('');
   const [isToggled, setIsToggled] = useState(false);
@@ -27,7 +28,7 @@ const ModalAddTransaction = ({ addTransaction }) => {
     }
   };
 
-  const handleChangeDate = e => {
+  const handleChangeDate = () => {
     setDate('');
   };
 
@@ -40,64 +41,83 @@ const ModalAddTransaction = ({ addTransaction }) => {
   };
 
   return (
-    <div className={css.modal} onSubmit={handlerSubmit}>
-      <h2 className={css.modalTitle}>Add transaction</h2>
-      <form className={css.modalForm}>
-        <div className={css.modalWrappenTransaction}>
-          {isToggled ? (
-            <p className={css.activeTransactionIncome}>Income</p>
-          ) : (
-            <p className={css.modalTransactionIncome}>Income</p>
-          )}
-          <label className={css.toggleSwitch}>
-            <input type="checkbox" checked={isToggled} onChange={onToggle} />
-            <span className={css.switch} />
-          </label>
-          {isToggled ? (
-            <p className={css.modalTransactionExpense}>Expense</p>
-          ) : (
-            <p className={css.activeTransactionExpense}>Expense</p>
-          )}
-        </div>
-        {!isToggled && (
-          <select className={css.modalSelect} defaultValue="Select a category">
-            <option disabled hidden>
-              Select a category
-            </option>
-          </select>
-        )}
-        <div className={css.modalWrapper}>
-          <input
-            className={css.formInputSum}
-            type="text"
-            name="sum"
-            value={sum}
-            onChange={handleNameChange}
-            placeholder="0.00"
-          />
-          <div className={css.inputDatetime}>
-            <Datetime
-              dateFormat="DD.MM.YYYY"
-              timeFormat={false}
-              value={date}
-              onChange={handleChangeDate}
+      <div className={css.overlay} onClick={onClickBackdrop}>
+        <div className={css.modal}>
+          <button type="button" className={css.modalCloseBtn} onClick={onClose}>
+            <img
+              className={css.modalCloseIcon}
+              src={modalCloseIcon}
+              alt="close"
             />
-            <img className={css.calendarIcon} src={calendar} alt="calendar" />
-          </div>
+          </button>
+          <h2 className={css.modalTitle}>Add transaction</h2>
+          <form className={css.modalForm} onSubmit={() => handlerSubmit()}>
+            <div className={css.modalWrappenTransaction}>
+              {isToggled ? (
+                <p className={css.activeTransactionIncome}>Income</p>
+              ) : (
+                <p className={css.modalTransactionIncome}>Income</p>
+              )}
+              <label className={css.toggleSwitch}>
+                <input
+                  type="checkbox"
+                  checked={isToggled}
+                  onChange={onToggle}
+                />
+                <span className={css.switch} />
+              </label>
+              {isToggled ? (
+                <p className={css.modalTransactionExpense}>Expense</p>
+              ) : (
+                <p className={css.activeTransactionExpense}>Expense</p>
+              )}
+            </div>
+            {!isToggled && (
+              <select
+                className={css.modalSelect}
+                defaultValue="Select a category"
+              >
+                <option disabled hidden>
+                  Select a category
+                </option>
+              </select>
+            )}
+            <div className={css.modalWrapper}>
+              <input
+                className={css.formInputSum}
+                type="text"
+                name="sum"
+                value={sum}
+                onChange={handleNameChange}
+                placeholder="0.00"
+              />
+              <div className={css.inputDatetime}>
+                <Datetime
+                  dateFormat="DD.MM.YYYY"
+                  timeFormat={false}
+                  value={date}
+                  onChange={handleChangeDate}
+                />
+                <img
+                  className={css.calendarIcon}
+                  src={calendar}
+                  alt="calendar"
+                />
+              </div>
+            </div>
+            <input
+              className={css.inputCommentText}
+              type="text"
+              name="comment"
+              value={comment}
+              onChange={handleNameChange}
+              placeholder="Comment"
+            />
+            <button className={css.btnAdd}>Add </button>
+            <button className={css.btnCancel}>Cancel</button>
+          </form>
         </div>
-        <input
-          className={css.inputCommentText}
-          type="text"
-          name="comment"
-          value={comment}
-          onChange={handleNameChange}
-          placeholder="Comment"
-        />
-        <button className={css.btnAdd}>Add </button>
-        <button className={css.btnCancel}>Cancel</button>
-      </form>
-    </div>
+      </div>
   );
 };
-
 export default ModalAddTransaction;
