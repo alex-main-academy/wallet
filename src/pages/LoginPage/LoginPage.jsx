@@ -10,7 +10,6 @@ const LoginPage = () => {
 
         <LoginForm />
       </div>
-      <ButtonAddTransactions/>
     </div>
   );
 };
