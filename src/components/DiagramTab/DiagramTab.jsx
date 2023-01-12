@@ -5,18 +5,15 @@ import { nanoid } from '@reduxjs/toolkit';
 import styles from './DiagramTab.module.css';
 import { fetchTransactionsSummaryOfPeriod } from './operation';
 import { useSelector } from 'react-redux';
-// import { selectStatistic } from './Selector';
-// import { useSelector } from 'react-redux';
+
 import { selectStatistic } from './Selector';
-// import { Link, useLocation, useSearchParams } from 'react-router-dom';
+
 
 ChartJS.register(ArcElement, Tooltip);
 
 const DiagramTab = () => {
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const username = useSearchParams.get('query');
-  // const location = useLocation();
+
 
 
 
@@ -25,60 +22,7 @@ const DiagramTab = () => {
 
   const dataBASE = useSelector(selectStatistic)
 
-  // const dataBASE = {
-  //   categoriesSummary: [
-  //     {
-  //       name: 'Income',
-  //       type: 'INCOME',
-  //       total: 4000,
-  //     },
-  //     {
-  //       name: 'Education',
-  //       type: 'EXPENSE',
-  //       total: -274,
-  //     },
-  //     {
-  //       name: 'Household products',
-  //       type: 'EXPENSE',
-  //       total: -284,
-  //     },
-  //     {
-  //       name: 'Products',
-  //       type: 'EXPENSE',
-  //       total: -700,
-  //     },
-  //     {
-  //       name: 'Car',
-  //       type: 'EXPENSE',
-  //       total: -70,
-  //     },
-  //     {
-  //       name: 'Child care',
-  //       type: 'EXPENSE',
-  //       total: -285,
-  //     },
-  //     {
-  //       name: 'Self care',
-  //       type: 'EXPENSE',
-  //       total: -28,
-  //     },
-  //     {
-  //       name: 'Leisure',
-  //       type: 'EXPENSE',
-  //       total: -480,
-  //     },
-  //     {
-  //       name: 'Main expenses',
-  //       type: 'EXPENSE',
-  //       total: -2000,
-  //     },
-  //   ],
-  //   incomeSummary: 4000,
-  //   expenseSummary: -3245,
-  //   periodTotal: 755,
-  //   year: null,
-  //   month: null,
-  // };
+  
 
   const DiagramaItem = dataBASE.categoriesSummary.filter(({ type }) =>
     type.includes('EXPENSE')
