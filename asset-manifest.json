@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/wallet/static/css/main.d13d93ee.css",
-    "main.js": "/wallet/static/js/main.e6eab0ac.js",
+    "main.css": "/wallet/static/css/main.6b9edaaa.css",
+    "main.js": "/wallet/static/js/main.4f10dd6c.js",
     "static/media/CirceRegular.ttf": "/wallet/static/media/CirceRegular.f80cf2f1a50fc5107f4c.ttf",
     "static/media/CirceBold.ttf": "/wallet/static/media/CirceBold.d9332714c66b14bb30e5.ttf",
     "static/media/Poppins-Regular.ttf": "/wallet/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
@@ -11,11 +11,15 @@
     "static/media/symbol-defs.svg": "/wallet/static/media/symbol-defs.4cc710fab27dc121630baf53a23d8b1f.svg",
     "index.html": "/wallet/index.html",
     "static/media/btnAddTransactions.svg": "/wallet/static/media/btnAddTransactions.8161743e934e48ec91862c2b424e9e9a.svg",
-    "main.d13d93ee.css.map": "/wallet/static/css/main.d13d93ee.css.map",
-    "main.e6eab0ac.js.map": "/wallet/static/js/main.e6eab0ac.js.map"
+    "static/media/calendar.svg": "/wallet/static/media/calendar.2cbf98a7948692ea9639d261ef7c682a.svg",
+    "static/media/income.svg": "/wallet/static/media/income.6194a661e88e1e5113d2.svg",
+    "static/media/close.svg": "/wallet/static/media/close.4ca60f1813426122dabf98a3268fb691.svg",
+    "static/media/expense.svg": "/wallet/static/media/expense.c1930871236002c803c7.svg",
+    "main.6b9edaaa.css.map": "/wallet/static/css/main.6b9edaaa.css.map",
+    "main.4f10dd6c.js.map": "/wallet/static/js/main.4f10dd6c.js.map"
   },
   "entrypoints": [
-    "static/css/main.d13d93ee.css",
-    "static/js/main.e6eab0ac.js"
+    "static/css/main.6b9edaaa.css",
+    "static/js/main.4f10dd6c.js"
   ]
 }
