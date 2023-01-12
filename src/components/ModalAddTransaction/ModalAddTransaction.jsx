@@ -5,13 +5,19 @@ import calendar from './images/calendar.svg';
 import modalCloseIcon from './images/close.svg'
 import { useState } from 'react';
 
-const ModalAddTransaction = ({ addTransaction }) => {
+const ModalAddTransaction = ({ addTransaction}) => {
   const [sum, setSum] = useState('');
   const [comment, setComment] = useState('');
   const [isToggled, setIsToggled] = useState(false);
   const [date, setDate] = useState(new Date());
   const onToggle = () => setIsToggled(!isToggled);
 
+  const [addModalOpen, setAddModalOpen] = useState(false);
+
+  const handleClose = ()=>{
+    setAddModalOpen(false)
+    console.log('click')
+  }
 
   const handleNameChange = e => {
     const { name, value } = e.target;
@@ -44,13 +50,13 @@ const ModalAddTransaction = ({ addTransaction }) => {
 
 
   return (
-    <div className={css.overlay}>
-    <div className={css.modal} onSubmit={handlerSubmit} >
-      <div className={css.modalClose}>
+    <div className={css.overlay }>
+    <div className={css.modal}  >
+      <button type="button" className={css.modalCloseBtn} onClick={() => handleClose()} >
         <img className={css.modalCloseIcon} src={modalCloseIcon} alt="close"/>
-      </div>
+      </button>
       <h2 className={css.modalTitle}>Add transaction</h2>
-      <form className={css.modalForm}>
+      <form className={css.modalForm} onSubmit={() => handlerSubmit()}>
         <div className={css.modalWrappenTransaction}>
           {isToggled ? (
             <p className={css.activeTransactionIncome}>Income</p>

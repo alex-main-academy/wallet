@@ -21,10 +21,10 @@ const ButtonAddTransactions = () => {
 
   return (
     <>
-    <button className={css.btnAdd} onClick={() => toggleModal()} >
+    <button  type="button" className={css.btnAdd} onClick={() => toggleModal()} >
       <img className={css.btnIcon} src={btnAddTransactions} alt="calendar"/>
     </button>
-    	{isModalAddTransactionOpen && <ModalAddTransaction /> }
+    	{isModalAddTransactionOpen && <ModalAddTransaction/> }
       </>
   );
 };

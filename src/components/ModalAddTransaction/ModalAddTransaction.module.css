@@ -20,10 +20,15 @@
   z-index: 1040;
 }
 
-.modalCloseIcon {
+.modalCloseBtn {
   position: absolute;
   top: 20px;
   right: 20px;
+  border: none;
+  background-color: transparent;
+}
+
+.modalCloseIcon {
   width: 16px;
   height: 16px;
 }
