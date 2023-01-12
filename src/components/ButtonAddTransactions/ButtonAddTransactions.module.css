@@ -8,6 +8,11 @@
 
 }
 
+.btnAdd:focus {
+  border: none;
+  outline: none;
+}
+
 @media screen and (min-width: 767px) {
   .btnAdd {
     bottom: 20px;
