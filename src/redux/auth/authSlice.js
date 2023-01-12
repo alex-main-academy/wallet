@@ -3,6 +3,7 @@ import { register, logIn, logOut, refreshUser } from './authOperations';
 
 const handleRejected = (state, action) => {
   state.error = 'Something went wrong. Check your email and password';
+  state.isLoading = false;
 };
 
 const state = {
@@ -11,16 +12,26 @@ const state = {
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
+  isLoading: false,
 };
 
 export const auth = createSlice({
   name: 'auth',
   initialState: state,
   extraReducers: {
+    [register.pending](state) {
+      state.isLoading = true;
+      state.error = null;
+    },
     [register.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
+      state.error = null;
+      state.isLoading = false;
+    },
+    [logIn.pending](state) {
+      state.isLoading = true;
       state.error = null;
     },
     [logIn.fulfilled](state, action) {
@@ -28,6 +39,7 @@ export const auth = createSlice({
       state.token = action.payload.token;
       state.isLoggedIn = true;
       state.error = null;
+      state.isLoading = false;
     },
     [logIn.rejected]: handleRejected,
     [logOut.fulfilled](state) {
@@ -37,16 +49,19 @@ export const auth = createSlice({
     },
     [refreshUser.pending](state) {
       state.isRefreshing = true;
+      state.isLoading = true;
     },
     [refreshUser.fulfilled](state, action) {
       state.user = action.payload;
       state.isLoggedIn = true;
       state.isRefreshing = false;
       state.error = null;
+      state.isLoading = false;
     },
     [refreshUser.rejected](state) {
       state.isRefreshing = false;
       state.error = null;
+      state.isLoading = false;
     },
   },
 });
