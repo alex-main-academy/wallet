@@ -1,0 +1,58 @@
+.logout_btn {
+  background: none;
+  display: flex;
+  border: none;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+.btn_text {
+  color: #bdbdbd;
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: var(--primary-font);
+}
+.ico {
+  width: 18px;
+  height: 18px;
+  color: #bdbdbd;
+}
+@media screen and (max-width: 767px) {
+  .btn_text {
+    display: none;
+  }
+}
+
+.backdrop {
+  background-color: rgba(25, 25, 25, 0.5);
+  position: absolute;
+  inset: 0;
+}
+.modal {
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 150px;
+  border-radius: 10px;
+  font-family: var(--primary-font);
+  font-size: 18px;
+  align-items: center;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+.modal_btn {
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  font-size: 18px;
+  background: none;
+  border: none;
+  width: 200px;
+  height: 30px;
+}
