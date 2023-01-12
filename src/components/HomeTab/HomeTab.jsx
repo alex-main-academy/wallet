@@ -112,7 +112,7 @@ const HomeTab = () => {
                         </table>
                       ))
                   ) : ( 
-                    <p>{'No Transactions'}</p>
+                    <p className={s.noTransactionMob}>{'No Transactions'}</p>
                   )}
                 </div>
               </div>
