@@ -8,7 +8,7 @@ const ButtonAddTransactions = () => {
   const [isModalAddTransactionOpen, setIsModalAddTransactionOpen] = useState(false);
 
 
-  const toggleModal = () => {
+  const openModal = () => {
 		setIsModalAddTransactionOpen(true);
 	};
 
@@ -21,10 +21,11 @@ const ButtonAddTransactions = () => {
 
   return (
     <>
-    <button  type="button" className={css.btnAdd} onClick={() => toggleModal()} >
+    {isModalAddTransactionOpen && <ModalAddTransaction/> }
+    <button  type="button" className={css.btnAdd} onClick={() => openModal()} >
       <img className={css.btnIcon} src={btnAddTransactions} alt="calendar"/>
     </button>
-    	{isModalAddTransactionOpen && <ModalAddTransaction/> }
+
       </>
   );
 };

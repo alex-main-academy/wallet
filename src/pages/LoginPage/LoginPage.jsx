@@ -1,5 +1,6 @@
 import styles from './LoginPage.module.css';
 import LoginForm from './LoginForm';
+import ButtonAddTransactions from 'components/ButtonAddTransactions/ButtonAddTransactions';
 
 const LoginPage = () => {
   return (
@@ -9,6 +10,7 @@ const LoginPage = () => {
 
         <LoginForm />
       </div>
+      <ButtonAddTransactions/>
     </div>
   );
 };

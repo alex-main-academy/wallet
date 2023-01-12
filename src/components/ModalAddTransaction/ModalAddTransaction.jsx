@@ -12,6 +12,12 @@ const ModalAddTransaction = ({ addTransaction}) => {
   const [date, setDate] = useState(new Date());
   const onToggle = () => setIsToggled(!isToggled);
 
+  const [isModalShow, setIsModalShow] = useState(false);
+
+ const handleClickClose = () => {
+  setIsModalShow(true)
+  console.log("click")
+ }
 
   const handleNameChange = e => {
     const { name, value } = e.target;
@@ -44,9 +50,11 @@ const ModalAddTransaction = ({ addTransaction}) => {
 
 
   return (
-    <div className={css.overlay }>
-    <div className={css.modal}  >
-      <button type="button" className={css.modalCloseBtn} >
+    <>
+    {!isModalShow && (
+    <div className={css.overlay}>
+    <div className={css.modal}>
+      <button type="button" className={css.modalCloseBtn} onClick={handleClickClose} >
         <img className={css.modalCloseIcon} src={modalCloseIcon} alt="close"/>
       </button>
       <h2 className={css.modalTitle}>Add transaction</h2>
@@ -106,6 +114,8 @@ const ModalAddTransaction = ({ addTransaction}) => {
       </form>
       </div>
     </div>
+    )}
+    </>
   );
 };
 
