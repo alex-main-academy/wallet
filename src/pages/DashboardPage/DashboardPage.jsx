@@ -10,16 +10,22 @@ import { Suspense } from 'react';
 import { selectIsLoading } from 'redux/transactions/transactionsSelectors';
 
 const DashboardPage = () => {
-  const isLoading = useSelector(selectIsLoading)
+  const isLoading = useSelector(selectIsLoading);
   return (
     <section className={css.dashboard}>
       <Header />
       <div className="container">
-        <Navigation />
-        <Balance />
-        <ButtonAddTransactions />
-        <Suspense fallback={<Loader />}></Suspense>
-        <Outlet />
+        <div className={css.dashboard__content}>
+          <div className={css.dashboard__nav}>
+            <Navigation />
+            <Balance />
+            <ButtonAddTransactions />
+            <Suspense fallback={<Loader />}></Suspense>
+          </div>
+          <div className={css.dashboard__tab}>
+            <Outlet />
+          </div>
+        </div>
       </div>
       {isLoading && <Loader />}
     </section>

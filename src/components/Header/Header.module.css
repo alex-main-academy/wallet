@@ -74,27 +74,3 @@
         border: none;
     }
 }
-
-.header__menu__button {
-    padding: 0 0 0 26px;
-    outline: none;
-    border: none;
-    background-color: transparent;
-    background-image: url(./images/exit-icon.png);
-    background-repeat: no-repeat;
-    background-position: left center;
-
-    color: var(--gray-text-color);
-    font-size: 18px;
-    font-family: var(--primary-font);
-
-    cursor: pointer;
-}
-
-@media screen and (max-width:767px) {
-    .header__menu__button {
-        padding: 0;
-        width: 18px;
-        height: 18px;
-    }
-}

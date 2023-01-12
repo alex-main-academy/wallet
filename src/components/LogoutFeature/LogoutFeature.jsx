@@ -1,9 +1,9 @@
 import styles from './LogoutFeature.module.css';
 import React from 'react';
-import { BiLogOut } from 'react-icons/bi';
 import { logOut } from 'redux/auth/authOperations';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import exitIcon from './images/exit-icon.png';
 
 export default function LogoutFeature() {
   const dispatch = useDispatch(logOut);
@@ -15,7 +15,7 @@ export default function LogoutFeature() {
   return (
     <>
       <button onClick={handleClick} className={styles.logout_btn} type="button">
-        <BiLogOut className={styles.ico} />
+        <img src={exitIcon} alt="icon" />
         <span className={styles.btn_text}>Exit</span>
       </button>
       {modalShown && (
