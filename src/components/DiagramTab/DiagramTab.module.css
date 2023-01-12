@@ -1,0 +1,269 @@
+@media screen and (min-width: 320px) {
+  .statisticChart {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 768px) {
+  .statisticChart {
+    flex-direction: row;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .statisticChart {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .diagram {
+    width: 288px;
+    margin: 0 auto;
+    margin-bottom: 32px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .diagram {
+    width: 336px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .diagram {
+    width: 280px;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .diagramTitle {
+    font-size: 30px;
+    line-height: 1.5;
+    margin-top: 32px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .diagramTitle {
+    margin-top: 20px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .diagramTitle {
+    margin-top: 32px;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .incomeSum {
+    width: 144px;
+    height: 144px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 148px;
+    left: calc(50% - (144px / 2));
+    /* background-color: rgba(11, 184, 135, 0.3); */
+    border-radius: 50%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .incomeSum {
+    width: 166px;
+    height: 166px;
+    position: relative;
+    top: -251px;
+    left: 0px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .incomeSum {
+    width: 140px;
+    height: 140px;
+    top: -210px;
+    left: 0px;
+  }
+}
+
+.chartItem {
+  margin: 0 auto;
+  padding: 0;
+}
+
+@media screen and (min-width: 320px) {
+  .select {
+    width: 336px;
+    gap: 32px;
+    margin-top: 0px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .select {
+    display: flex;
+    width: 336px;
+    gap: 32px;
+    margin-top: 97px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .select {
+    width: 395px;
+    gap: 32px;
+    margin: 0 auto;
+    margin-top: 97px;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .selectItem {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    line-height: 1.47;
+    width: 280px;
+    height: 50px;
+    border-radius: 30px;
+    border: 1px solid #000000;
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .selectItem {
+    display: flex;
+    flex-direction: row;
+    width: 160px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .selectItem {
+    display: flex;
+    width: 182px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .chart {
+    width: 280px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .chart {
+    width: 336px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .chart {
+    width: 395px;
+  }
+}
+
+.title {
+  display: flex;
+  border: 2px;
+  border-color: black;
+  padding: 0 px;
+  width: 100%;
+  height: 58px;
+  justify-content: space-between;
+  justify-items: center;
+  font-size: 18px;
+  line-height: 1.47;
+  font-weight: 700;
+  margin-bottom: 31px;
+  border-radius: 30px;
+}
+
+.titleItem {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.list {
+  width: 100%;
+}
+
+.listItem {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+  width: 100%;
+  margin: 0 auto;
+  /* padding-left: 16px; */
+
+  padding-bottom: 14px;
+}
+
+.expenseItem {
+  display: flex;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.expenseItemText {
+  display: flex;
+  padding-left: 16px;
+  width: 100%;
+}
+
+.nameExpense {
+  width: 100%;
+}
+
+.separator {
+  margin-top: 14px;
+  width: 395px;
+  height: 1px;
+  background-color: #dcdcdf;
+  /* margin-left: -16px; */
+}
+
+.totalList {
+  width: 100%;
+}
+
+.totalListItem {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-top: 17px;
+}
+
+.result {
+  font-size: 16px;
+  line-height: 1.47;
+  font-weight: 700;
+}
+
+.exp {
+  color: #ff6596;
+  font-size: 16px;
+  line-height: 1.47;
+  font-weight: 700;
+}
+
+.income {
+  color: #24cca7;
+  font-size: 16px;
+  line-height: 1.47;
+  font-weight: 700;
+}
