@@ -15,12 +15,18 @@ const DashboardPage = () => {
     <section className={css.dashboard}>
       <Header />
       <div className="container">
-        <Navigation />
-        <Balance />
-        <Currency />
-        <ButtonAddTransactions />
-        {/* <Suspense fallback={<Loader />}></Suspense> */}
-        <Outlet />
+        <div className={css.dashboard__content}>
+          <div className={css.dashboard__nav}>
+            <Navigation />
+            <Balance />
+            <Currency />
+            <ButtonAddTransactions />
+            <Suspense fallback={<Loader />}></Suspense>
+          </div>
+          <div className={css.dashboard__tab}>
+            <Outlet />
+          </div>
+        </div>
       </div>
       {/* {isLoading && <Loader />} */}
     </section>

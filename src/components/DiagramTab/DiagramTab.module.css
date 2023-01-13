@@ -236,6 +236,9 @@
   /* margin-left: -16px; */
 }
 
+.ListEmpty {
+  text-align: center;
+}
 .totalList {
   width: 100%;
 }
