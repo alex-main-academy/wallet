@@ -16,22 +16,24 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
   const [amount, setAmount] = useState('');
   const [comment, setComment] = useState('');
   const [type, setType] = useState('EXPENSE')
-  const [categoryId, setCategoryId] = useState('');
+  const [categoryId, setCategoryId] = useState("");
   const [isToggled, setIsToggled] = useState(false);
 
  const dispatch = useDispatch();
  const categories = useSelector(selectTransactionCategories);
  console.log(categories)
-//  const isLoading = useSelector(selectTransactionIsLoading)
-//  console.log(isLoading)
+
 
   const onToggle = () => {
-    setIsToggled(!isToggled)
+    setIsToggled(!isToggled);
+    if(isToggled) {
+      setType('EXPENSE')
+    } else {
+      setType('INCOME')
+      setCategoryId("063f1132-ba5d-42b4-951d-44011ca46262")
+    }
   };
 
-  const handleChangeType = () => {
-    setType("INCOME");
-  }
 
   useEffect(() => {
     dispatch(fetchTransactionCategories())
@@ -40,6 +42,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
 
   const handleNameChange = e => {
     const { name, value } = e.target;
+    console.log(name)
     switch (name) {
       case 'amount':
         setAmount(parseInt(value));
@@ -47,10 +50,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
 
       case 'comment':
         setComment(value);
-        break;
-
-      case 'type':
-        setType(value);
         break;
 
       case 'categoryId':
@@ -71,7 +70,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     dispatch(addTransaction({transactionDate, type, categoryId, comment, amount }));
     setTransactionDate(new Date());
     setType("EXPENSE");
-    setCategoryId('');
+    setCategoryId("");
     setComment('');
     setAmount('');
   };
@@ -101,7 +100,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
                   checked={isToggled}
                   onChange={onToggle}
                 />
-                <span className={css.switch} onClick={handleChangeType}/>
+                <span className={css.switch} />
               </label>
               {isToggled ? (
                 <p className={css.modalTransactionExpense}>Expense</p>
@@ -112,20 +111,23 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
             {!isToggled && (
               <select
                 className={css.modalSelect}
+              name="categoryId"
+
                 defaultValue="Select a category"
+                onChange={handleNameChange}
               >
                 <option disabled hidden>
                   Select a category
                 </option>
-                {categories.map(({id, name}) => (
-              <option className={css.categoriesSelect} value={id} onChange={handleNameChange}>{name}</option>
+               {categories.filter((category) => category.type === type).map((category) => (
+              <option className={css.categoriesSelect} key={category.id} value={category.id}>{category.name}</option>
             ))}
               </select>
             )}
             <div className={css.modalWrapper}>
               <input
                 className={css.formInputSum}
-                type="text"
+                type="number"
                 name="amount"
                 value={amount}
                 onChange={handleNameChange}
