@@ -2,4 +2,59 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(231, 234, 242, 0.4);
+
+    /* background-image: url(./images/blue-back.png), url(./images/pink-back.png);
+    background-repeat: no-repeat;
+    background-position: bottom left, top right; */
+}
+
+@media screen and (max-width:1280px) {
+    .dashboard {
+        background-position: bottom left, top right -200px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .dashboard {
+        background-image: none;
+    }
+}
+
+
+.dashboard__content {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width:1280px) {
+    .dashboard__content {
+        flex-direction: column;
+    }
+}
+
+.dashboard__nav {
+    padding-right: 70px;
+    border-right: 1px solid #E7E5F2;
+    box-shadow: 1px 0px 0px rgba(255, 255, 255, 0.6);
+    height: calc(100vh - 85px);
+}
+
+@media screen and (max-width:1280px) {
+    .dashboard__nav {
+        padding-right: 0;
+        height: auto;
+        border: none;
+        box-shadow: none;
+    }
+}
+
+
+.dashboard__tab {
+    padding: 46px 0 0 0;
+}
+
+@media screen and (max-width:1280px) {
+    .dashboard__tab {
+        padding: 0;
+    }
 }
