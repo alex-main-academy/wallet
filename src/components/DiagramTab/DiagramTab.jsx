@@ -6,21 +6,38 @@ import styles from './DiagramTab.module.css';
 import {
   fetchTransactionsSummaryOfPeriod,
   fetchTransactionsSummary,
-} from './operation';
+} from 'redux/transactions/transactionsOperations';
 import { useSelector } from 'react-redux';
-import { selectStatistic } from './Selector';
+import { selectStatistic } from 'redux/transactions/transactionsSelectors';
+import { useSearchParams } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
 ChartJS.register(ArcElement, Tooltip);
 
+const monthNumber = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 const DiagramTab = () => {
-  const [month, setMonth] = useState('');
-  const [year, SetYear] = useState('2023');
+  const today = new Date();
+  const [month, setMonth] = useState(today.getMonth());
+  const [year, SetYear] = useState(today.getFullYear());
   const dispatch = useDispatch();
 
   const dataBASE = useSelector(selectStatistic);
-
+  const [params, setParams] = useSearchParams();
 
   let DiagramaItem = null;
   let ExpenseSum = null;
@@ -28,7 +45,7 @@ const DiagramTab = () => {
   let visible = false;
   let data = null;
 
-  if (dataBASE.categoriesSummary.length !== 0) {
+  if (dataBASE.categoriesSummary) {
     visible = true;
     DiagramaItem = dataBASE.categoriesSummary.filter(({ type }) =>
       type.includes('EXPENSE')
@@ -100,10 +117,16 @@ const DiagramTab = () => {
   const onChanged = el => {
     switch (el.target.id) {
       case 'month':
+        const mons = monthNumber.findIndex(
+          elment => elment.toLowerCase() === el.target.value
+        );
+        console.log(mons, el.target.value);
         setMonth(el.target.value);
+        setParams({ month: mons + 1, year });
         break;
       case 'year':
         SetYear(el.target.value);
+        setParams({ month, year: el.target.value });
         break;
       default:
         break;
@@ -117,7 +140,7 @@ const DiagramTab = () => {
         {visible ? <Doughnut data={data} /> : <p>Nothing</p>}
         <p className={styles.incomeSum}>
           <span>&#8372;</span>
-          {dataBASE.incomeSummary}
+          {dataBASE.periodTotal}
         </p>
       </div>
 
@@ -169,10 +192,9 @@ const DiagramTab = () => {
               <p>Sum</p>
             </div>
           </div>
-
-          {visible ? (
+          {!visible ? (
             <ul className={styles.list}>
-              {DiagramaItem.map(({ name, type, total }, index) => (
+              {DiagramaItem.map(({ name, total }, index) => (
                 <li key={nanoid()} className={styles.listItem}>
                   <div className={styles.expenseItem}>
                     <p
@@ -204,7 +226,7 @@ const DiagramTab = () => {
             </p>
             <p className={styles.totalListItem}>
               <span className={styles.result}>Income:</span>
-              <span className={styles.income}> {dataBASE.periodTotal}</span>
+              <span className={styles.income}> {dataBASE.incomeSummary}</span>
             </p>
           </div>
         </div>
@@ -215,4 +237,3 @@ const DiagramTab = () => {
 
 export default DiagramTab;
 // the end
-

@@ -56,3 +56,32 @@ export const addTransaction = createAsyncThunk(
     }
   );
 
+    //статистика
+  export const fetchTransactionsSummary = createAsyncThunk(
+    'categories/fetch',
+    async (_, thunkAPI) => {
+      try {
+        const {data} = await axios.get('/api/transactions-summary');
+        return data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+  
+  export const fetchTransactionsSummaryOfPeriod = createAsyncThunk(
+    'categories/fetchOfMonth',
+    async ({ month, year }, thunkAPI) => {
+      try {
+        const {data} = await axios.get(
+          `/api/transactions-summary?month=${month}&year=${year}`
+        );
+        return data;
+      } catch (error) {
+        
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+  
+
