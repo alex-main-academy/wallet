@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { nanoid } from '@reduxjs/toolkit';
@@ -31,8 +31,10 @@ const monthNumber = [
 
 const DiagramTab = () => {
   const today = new Date();
-  const [month, setMonth] = useState(today.getMonth());
-  const [year, SetYear] = useState(today.getFullYear());
+  const month = today.getMonth();
+  const year = today.getFullYear();
+  // const [month, setMonth] = useState(today.getMonth());
+  // const [year, SetYear] = useState(today.getFullYear());
   const dispatch = useDispatch();
   const dataBASE = useSelector(selectStatistic);
 
@@ -112,9 +114,20 @@ const DiagramTab = () => {
   }, []);
 
   useEffect(() => {
+    const month = params.get('month');
+    const year = params.get('year');
+
+    console.log(month);
+    if (!month || !year) {
+      return;
+    }
     dispatch(fetchTransactionsSummaryOfPeriod({ month, year }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [month, year]);
+  }, [params]);
+  // useEffect(() => {
+  //   dispatch(fetchTransactionsSummaryOfPeriod({ month, year }));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [month, year]);
 
   const onChanged = el => {
     switch (el.target.id) {
@@ -123,11 +136,11 @@ const DiagramTab = () => {
           elment => elment.toLowerCase() === el.target.value
         );
         console.log(mons, el.target.value);
-        setMonth(el.target.value);
+        // setMonth(el.target.value);
         setParams({ month: mons + 1, year });
         break;
       case 'year':
-        SetYear(el.target.value);
+        // SetYear(el.target.value);
         setParams({ month, year: el.target.value });
         break;
       default:
