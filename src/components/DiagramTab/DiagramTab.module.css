@@ -58,8 +58,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 148px;
+    position: relative;
+    top: -215px;
     left: calc(50% - (144px / 2));
     /* background-color: rgba(11, 184, 135, 0.3); */
     border-radius: 50%;
@@ -184,6 +184,7 @@
   font-weight: 700;
   margin-bottom: 31px;
   border-radius: 30px;
+  background-color: #FFFFFF;
 }
 
 .titleItem {
@@ -193,6 +194,7 @@
   margin: auto;
   padding-left: 20px;
   padding-right: 20px;
+  
 }
 
 .list {

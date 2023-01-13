@@ -10,7 +10,6 @@ import {
 import { useSelector } from 'react-redux';
 import { selectStatistic } from 'redux/transactions/transactionsSelectors';
 import { useSearchParams } from 'react-router-dom';
-
 import { useDispatch } from 'react-redux';
 
 ChartJS.register(ArcElement, Tooltip);
@@ -35,8 +34,8 @@ const DiagramTab = () => {
   const [month, setMonth] = useState(today.getMonth());
   const [year, SetYear] = useState(today.getFullYear());
   const dispatch = useDispatch();
-
   const dataBASE = useSelector(selectStatistic);
+
   const [params, setParams] = useSearchParams();
 
   let DiagramaItem = null;
@@ -46,7 +45,10 @@ const DiagramTab = () => {
   let data = null;
 
   if (dataBASE.categoriesSummary) {
-    visible = true;
+    if (dataBASE.categoriesSummary.length !== 0) {
+      visible = true;
+    }
+
     DiagramaItem = dataBASE.categoriesSummary.filter(({ type }) =>
       type.includes('EXPENSE')
     );
@@ -137,11 +139,17 @@ const DiagramTab = () => {
     <div className={styles.statisticChart}>
       <div className={styles.diagram}>
         <h1 className={styles.diagramTitle}>Statistics</h1>
-        {visible ? <Doughnut data={data} /> : <p>Nothing</p>}
-        <p className={styles.incomeSum}>
-          <span>&#8372;</span>
-          {dataBASE.periodTotal}
-        </p>
+        {visible ? (
+          <>
+            <Doughnut data={data} />
+            <p className={styles.incomeSum}>
+              <span>&#8372;</span>
+              {dataBASE.periodTotal}
+            </p>
+          </>
+        ) : (
+          <p>Nothing</p>
+        )}
       </div>
 
       <div className={styles.chartItem}>
@@ -150,6 +158,7 @@ const DiagramTab = () => {
             className={styles.selectItem}
             name="month"
             id="month"
+            value={month}
             onChange={onChanged}
           >
             <option value="january">January</option>
@@ -169,6 +178,7 @@ const DiagramTab = () => {
             className={styles.selectItem}
             name="year"
             id="year"
+            value={year}
             onChange={onChanged}
           >
             <option value="2019">2019</option>
@@ -192,7 +202,7 @@ const DiagramTab = () => {
               <p>Sum</p>
             </div>
           </div>
-          {!visible ? (
+          {visible ? (
             <ul className={styles.list}>
               {DiagramaItem.map(({ name, total }, index) => (
                 <li key={nanoid()} className={styles.listItem}>
@@ -236,4 +246,3 @@ const DiagramTab = () => {
 };
 
 export default DiagramTab;
-// the end
