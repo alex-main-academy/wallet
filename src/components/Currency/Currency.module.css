@@ -1,0 +1,37 @@
+.currencyContainer {
+  width: 280px;
+  height: 174px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: bottom;
+  background-image: url('./currencyImages/wave.png'),
+    url('./currencyImages/currencyBcg_mob.png');
+}
+.currencyLoader {
+  width: 280px;
+}
+
+@media screen and (min-width: 768px) {
+  .currencyContainer {
+    width: 336px;
+    height: 182px;
+    background-image: url('./currencyImages/wave.png'),
+      url('./currencyImages/currencyBcg_tab.png');
+  }
+  .currencyLoader {
+    width: 336px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .currencyContainer {
+    height: 331px;
+    width: 393px;
+    background-position: bottom;
+    background-image: url('./currencyImages/wave.png'),
+      url('./currencyImages/currencyBcg_desktop.png');
+  }
+  .currencyLoader {
+    width: 393px;
+  }
+}

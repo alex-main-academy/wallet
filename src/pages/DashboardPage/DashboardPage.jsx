@@ -8,20 +8,21 @@ import Loader from 'components/Loader/Loader';
 import { useSelector } from 'react-redux';
 import { Suspense } from 'react';
 import { selectIsLoading } from 'redux/transactions/transactionsSelectors';
-
+import { Currency } from 'components/Currency/Currency';
 const DashboardPage = () => {
-  const isLoading = useSelector(selectIsLoading)
+  const isLoading = useSelector(selectIsLoading);
   return (
     <section className={css.dashboard}>
       <Header />
       <div className="container">
         <Navigation />
         <Balance />
+        <Currency />
         <ButtonAddTransactions />
-        <Suspense fallback={<Loader />}></Suspense>
+        {/* <Suspense fallback={<Loader />}></Suspense> */}
         <Outlet />
       </div>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
     </section>
   );
 };
