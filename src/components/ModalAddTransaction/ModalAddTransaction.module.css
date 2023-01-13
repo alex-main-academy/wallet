@@ -173,6 +173,11 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
+input {
+  outline: none;
+  border: none;
+}
+
 .inputDatetime {
   position: relative;
   padding: 8px 10px;

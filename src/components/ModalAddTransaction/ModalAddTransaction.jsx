@@ -4,23 +4,57 @@ import 'react-datetime/css/react-datetime.css';
 import calendar from './images/calendar.svg';
 import modalCloseIcon from './images/close.svg';
 import { useState } from 'react';
+import { useDispatch} from 'react-redux';
+import { addTransaction} from 'redux/transactions/transactionsOperations';
+import { fetchTransactionCategories } from 'redux/transactionCategories/transactionCategoriesOperations';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectTransactionCategories } from 'redux/transactionCategories/transactionCategoriesSelectors';
 
-const ModalAddTransaction = ({ addTransaction, onClose, onClickBackdrop }) => {
-  const [sum, setSum] = useState('');
+const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
+  const [transactionDate, setTransactionDate] = useState(new Date());
+  const [amount, setAmount] = useState('');
   const [comment, setComment] = useState('');
+  const [type, setType] = useState('EXPENSE')
+  const [categoryId, setCategoryId] = useState('');
   const [isToggled, setIsToggled] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const onToggle = () => setIsToggled(!isToggled);
+
+ const dispatch = useDispatch();
+ const categories = useSelector(selectTransactionCategories);
+ console.log(categories)
+//  const isLoading = useSelector(selectTransactionIsLoading)
+//  console.log(isLoading)
+
+  const onToggle = () => {
+    setIsToggled(!isToggled)
+  };
+
+  const handleChangeType = () => {
+    setType("INCOME");
+  }
+
+  useEffect(() => {
+    dispatch(fetchTransactionCategories())
+  }, [dispatch]);
+
 
   const handleNameChange = e => {
     const { name, value } = e.target;
     switch (name) {
-      case 'sum':
-        setSum(value);
+      case 'amount':
+        setAmount(parseInt(value));
         break;
 
       case 'comment':
         setComment(value);
+        break;
+
+      case 'type':
+        setType(value);
+        break;
+
+      case 'categoryId':
+        setCategoryId(value);
         break;
 
       default:
@@ -29,15 +63,17 @@ const ModalAddTransaction = ({ addTransaction, onClose, onClickBackdrop }) => {
   };
 
   const handleChangeDate = () => {
-    setDate('');
+    setTransactionDate('');
   };
 
   const handlerSubmit = e => {
     e.preventDefault();
-    addTransaction({ sum, comment });
-    setSum('');
+    dispatch(addTransaction({transactionDate, type, categoryId, comment, amount }));
+    setTransactionDate(new Date());
+    setType("EXPENSE");
+    setCategoryId('');
     setComment('');
-    setDate(new Date());
+    setAmount('');
   };
 
   return (
@@ -51,20 +87,21 @@ const ModalAddTransaction = ({ addTransaction, onClose, onClickBackdrop }) => {
             />
           </button>
           <h2 className={css.modalTitle}>Add transaction</h2>
-          <form className={css.modalForm} onSubmit={() => handlerSubmit()}>
+          <form className={css.modalForm} onSubmit={handlerSubmit}>
             <div className={css.modalWrappenTransaction}>
               {isToggled ? (
                 <p className={css.activeTransactionIncome}>Income</p>
               ) : (
                 <p className={css.modalTransactionIncome}>Income</p>
               )}
-              <label className={css.toggleSwitch}>
-                <input 
+              <label className={css.toggleSwitch} >
+                <input
                   type="checkbox"
+                  value={type}
                   checked={isToggled}
                   onChange={onToggle}
                 />
-                <span className={css.switch} />
+                <span className={css.switch} onClick={handleChangeType}/>
               </label>
               {isToggled ? (
                 <p className={css.modalTransactionExpense}>Expense</p>
@@ -80,22 +117,25 @@ const ModalAddTransaction = ({ addTransaction, onClose, onClickBackdrop }) => {
                 <option disabled hidden>
                   Select a category
                 </option>
+                {categories.map(({id, name}) => (
+              <option className={css.categoriesSelect} value={id} onChange={handleNameChange}>{name}</option>
+            ))}
               </select>
             )}
             <div className={css.modalWrapper}>
               <input
                 className={css.formInputSum}
                 type="text"
-                name="sum"
-                value={sum}
+                name="amount"
+                value={amount}
                 onChange={handleNameChange}
                 placeholder="0.00"
               />
               <div className={css.inputDatetime}>
                 <Datetime
-                  dateFormat="DD.MM.YYYY"
+                  dateFormat="MM.DD.YYYY"
                   timeFormat={false}
-                  value={date}
+                  value={transactionDate}
                   onChange={handleChangeDate}
                 />
                 <img
