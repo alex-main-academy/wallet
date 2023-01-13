@@ -28,7 +28,7 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
-      {/* {isLoading && <Loader />} */}
+      {isLoading && <Loader />}
     </section>
   );
 };
