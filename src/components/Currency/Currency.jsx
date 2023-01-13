@@ -7,50 +7,56 @@ export const Currency = () => {
   const [currency, setCurrency] = useState([]);
 
   useEffect(() => {
+    const date = new Date();
+    const currentHour = date.getHours();
+    const currentMinute = date.getMinutes();
+    const currentTime = `${currentHour}-${currentMinute}`;
     async function getCurrency() {
       try {
         const response = await axios.get(
           'https://api.monobank.ua/bank/currency'
         );
-        console.log(response.data);
         const Currency = [response.data[0], response.data[1]];
         setCurrency(Currency);
-        console.log(Currency);
         localStorage.setItem('currency', JSON.stringify(Currency));
+        localStorage.setItem('time', `${currentHour + 1}-${currentMinute}`);
       } catch (e) {
         console.log(e);
       }
     }
-    getCurrency();
+    const localStorageTime = localStorage.getItem('time');
+    if (localStorageTime < currentTime) {
+      getCurrency();
+    }
+
     if (currency.length === 0) {
       setCurrency(JSON.parse(localStorage.getItem('currency')));
     }
-  }, []);
-  const parsedCurrency = JSON.parse(localStorage.getItem('currency'));
+  }, [currency.length]);
 
   return currency.length ? (
-    <div className={styles.currencyContainer}>
-      <table>
-        <tbody>
-          <tr>
-            <td>Purchase</td>
-            <td>Currency</td>
-            <td>Sale</td>
-          </tr>
-          <tr>
-            <td>USD</td>
-            <td>{currency[0].rateBuy.toFixed(2)}</td>
-            <td>{currency[0].rateSell.toFixed(2)}</td>
-          </tr>
+    <table className={styles.table}>
+      <tbody>
+        <tr className={styles.tableHead}>
+          <td className={styles.currency}>Currency</td>
+          <td className={styles.purchase}>Purchase</td>
+          <td className={styles.sale}>Sale</td>
+        </tr>
+      </tbody>
+      <tbody className={styles.tableBody}>
+        <tr className={styles.tableValues}>
+          <td>USD</td>
+          <td>{currency[0].rateBuy.toFixed(2)}</td>
+          <td>{currency[0].rateSell.toFixed(2)}</td>
+        </tr>
 
-          <tr>
-            <td>EUR</td>
-            <td>{currency[1].rateSell.toFixed(2)}</td>
-            <td>{currency[1].rateBuy.toFixed(2)}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <tr className={styles.tableValues}>
+          <td>EUR</td>
+          <td>{currency[1].rateSell.toFixed(2)}</td>
+          <td>{currency[1].rateBuy.toFixed(2)}</td>
+        </tr>
+      </tbody>
+    </table>
   ) : (
     <div>
       <Circles
