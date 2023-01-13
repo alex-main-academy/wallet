@@ -22,6 +22,7 @@ export const fetchTransactionsSummaryOfPeriod = createAsyncThunk(
       );
       return response;
     } catch (error) {
+      
       return thunkAPI.rejectWithValue(error.message);
     }
   }
