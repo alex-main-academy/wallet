@@ -8,6 +8,8 @@ import Currency from './Currency/Currency';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { refreshUser } from 'redux/auth/authOperations';
+import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -19,9 +21,30 @@ export const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="registration" element={<RegistrationPage />} />
-        <Route path="dashboard" element={<DashboardPage />}>
+        <Route
+          path="/"
+          element={
+            <PublicRoute restricted>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="registration"
+          element={
+            <PublicRoute restricted>
+              <RegistrationPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="dashboard"
+          element={
+            <PrivateRoute>
+              <DashboardPage />
+            </PrivateRoute>
+          }
+        >
           <Route index element={<HomeTab />} />
           <Route path="statistics" element={<DiagramTab />} />
           <Route path="currency" element={<Currency />} />
