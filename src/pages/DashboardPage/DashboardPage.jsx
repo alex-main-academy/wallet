@@ -8,7 +8,7 @@ import Loader from 'components/Loader/Loader';
 import { useSelector } from 'react-redux';
 import { Suspense } from 'react';
 import { selectIsLoading } from 'redux/transactions/transactionsSelectors';
-import { Currency } from 'components/Currency/Currency';
+// import { Currency } from 'components/Currency/Currency';
 const DashboardPage = () => {
   const isLoading = useSelector(selectIsLoading);
   return (
@@ -19,7 +19,6 @@ const DashboardPage = () => {
           <div className={css.dashboard__nav}>
             <Navigation />
             <Balance />
-            <Currency />
             <ButtonAddTransactions />
             <Suspense fallback={<Loader />}></Suspense>
           </div>
