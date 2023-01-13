@@ -128,7 +128,7 @@
   background-position: center;
 }
 
-input {
+.modalInut {
   width: 100%;
   margin-bottom: 40px;
   font-size: 15px;
@@ -141,7 +141,7 @@ input {
   border-bottom: 1px solid #e0e0e0;
 }
 
-input::placeholder {
+.modalInput::placeholder {
   font-family: var(--primary-font);
   font-size: 18px;
   line-height: 1.5;
@@ -167,10 +167,19 @@ input::placeholder {
   font-size: 18px;
   line-height: 1.5;
   font-weight: 700;
+  padding: 8px 10px;
+  outline: transparent;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .inputDatetime {
   position: relative;
+  padding: 8px 10px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+
 }
 
 .calendarIcon {
@@ -182,7 +191,21 @@ input::placeholder {
 }
 
 .inputCommentText {
+  width: 100%;
   height: 84px;
+  padding: 8px 10px;
+  outline: transparent;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.inputCommentText::placeholder {
+  font-family: var(--primary-font);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--gray-text-color);
 }
 
 .btnCancel {

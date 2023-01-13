@@ -59,7 +59,7 @@ const ModalAddTransaction = ({ addTransaction, onClose, onClickBackdrop }) => {
                 <p className={css.modalTransactionIncome}>Income</p>
               )}
               <label className={css.toggleSwitch}>
-                <input
+                <input 
                   type="checkbox"
                   checked={isToggled}
                   onChange={onToggle}
