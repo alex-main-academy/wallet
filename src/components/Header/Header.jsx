@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import css from './Header.module.css';
 import logoImage from './images/wallet-logo.png';
 import LogoutFeature from 'components/LogoutFeature/LogoutFeature';
+import LanguageToggler from 'components/LanguageToggler/LanguageToggler';
 
 const Header = () => {
   const userName = useSelector(state => state.auth.user.username);
@@ -23,6 +24,7 @@ const Header = () => {
           <div className={css.header__menu}>
             <span className={css.header__menu__name}>{userName}</span>
             <LogoutFeature />
+            <LanguageToggler />
           </div>
         </div>
       </div>

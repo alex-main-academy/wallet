@@ -10,6 +10,7 @@ import { register } from 'redux/auth/authOperations';
 import { useDispatch } from 'react-redux';
 import { useAuth } from 'hooks/useAuth';
 import { StyledLink } from './RegPage.styled';
+import translation from '../../assets/translation/register.json';
 
 export default function RegForm() {
   const dispatch = useDispatch();
