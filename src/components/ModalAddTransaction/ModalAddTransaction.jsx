@@ -21,7 +21,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
 
  const dispatch = useDispatch();
  const categories = useSelector(selectTransactionCategories);
- console.log(categories)
 
 
   const onToggle = () => {
@@ -42,7 +41,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
 
   const handleNameChange = e => {
     const { name, value } = e.target;
-    console.log(name)
     switch (name) {
       case 'amount':
         setAmount(parseInt(value));
@@ -61,13 +59,17 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     }
   };
 
-  const handleChangeDate = () => {
-    setTransactionDate('');
-  };
+
+  const handleChangeDate = event => {
+    console.log(event)
+      setTransactionDate(event);
+    }
 
   const handlerSubmit = e => {
     e.preventDefault();
-    dispatch(addTransaction({transactionDate, type, categoryId, comment, amount }));
+    const correctAmmount = type === "EXPENSE"? Number("-" + amount):amount
+    dispatch(addTransaction({transactionDate, type, categoryId, comment, amount: correctAmmount  }));
+
     setTransactionDate(new Date());
     setType("EXPENSE");
     setCategoryId("");
@@ -137,9 +139,10 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
                 <Datetime
                   dateFormat="MM.DD.YYYY"
                   timeFormat={false}
+                  name="transactionDate"
                   value={transactionDate}
                   onChange={handleChangeDate}
-                />
+                  />
                 <img
                   className={css.calendarIcon}
                   src={calendar}
