@@ -1,0 +1,149 @@
+.currencyLoader {
+  width: 280px;
+}
+
+.table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  gap: 12px;
+  background-color: var(--blue-back-color);
+  border-radius: 30px;
+  padding-bottom: 52px;
+  color: var(--secondary-text-color);
+  background-repeat: no-repeat;
+  background-image: url('../Currency/currencyImages/wave.png');
+  background-position: bottom;
+  background-size: contain;
+}
+
+.tableBody {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.tableHead {
+  height: 50px;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  margin-bottom: 12px;
+  padding-top: 11px;
+  padding-bottom: 12px;
+  padding-left: 17px;
+  padding-right: 20px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.sale {
+  display: block;
+}
+
+.tableValues {
+  display: flex;
+  gap: 64px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.43;
+}
+
+@media screen and (max-width: 319px) {
+  .tableHead {
+    display: flex;
+    gap: 12px;
+  }
+
+  .tableValues {
+    gap: 40px;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .table {
+    width: 280px;
+  }
+
+  .tableHead {
+    width: 280px;
+  }
+
+  .currency {
+    display: block;
+    width: 71px;
+    margin-right: 25px;
+  }
+
+  .purchase {
+    display: block;
+    width: 71px;
+    margin-right: 35px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .table {
+    width: 336px;
+    padding-bottom: 56px;
+  }
+
+  .tableHead {
+    height: 50px;
+    width: 336px;
+    padding-left: 21px;
+  }
+
+  .purchase {
+    margin-right: 76px;
+  }
+
+  .currency {
+    margin-right: 42px;
+  }
+
+  .tableValues {
+    gap: 95px;
+  }
+
+  .currencyLoader {
+    width: 336px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .table {
+    width: 393px;
+    padding-bottom: 179px;
+    gap: 24px;
+  }
+
+  .currencyLoader {
+    width: 393px;
+  }
+
+  .tableHead {
+    width: 393px;
+    padding-left: 21px;
+    height: 60px;
+    padding: 17px 64px 16px 44px;
+    margin-bottom: 0;
+  }
+
+  .purchase {
+    margin-right: 78px;
+  }
+
+  .tableBody {
+    padding: 0px 64px 0px 44px;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .currency__wrapper {
+    height: calc(100vh - 317px);
+  }
+}

@@ -5,8 +5,7 @@ import {
   deleteTransaction,
   fetchTransactionCategories,
   fetchTransactionsSummary,
-  fetchTransactionsSummaryOfPeriod
-
+  fetchTransactionsSummaryOfPeriod,
 } from './transactionsOperations';
 
 const initialState = {
@@ -17,17 +16,20 @@ const initialState = {
     expenseSummary: 0,
     periodTotal: 0,
     year: 0,
-    month: 0
+    month: 0,
   },
   isLoading: false,
   error: null,
+  transactionCategories: {
+    items: [],
+  },
 };
 
 const transactionsSlice = createSlice({
   name: 'userTransactions',
   initialState,
 
-  extraReducers:  {
+  extraReducers: {
     [fetchTransactions.pending]: state => {
       state.isLoading = true;
       state.error = null;
@@ -69,7 +71,7 @@ const transactionsSlice = createSlice({
       state.error = null;
     },
     [fetchTransactionCategories.fulfilled]: (state, { payload }) => {
-      state.items = payload;
+      state.transactionCategories.items = payload;
       state.isLoading = false;
       state.error = null;
     },
@@ -78,34 +80,31 @@ const transactionsSlice = createSlice({
       state.isLoading = false;
     },
 
-
-
-  [fetchTransactionsSummary.pending](state){
-      state.isLoading = true
-  },
-  [fetchTransactionsSummary.fulfilled](state,action){
+    [fetchTransactionsSummary.pending](state) {
+      state.isLoading = true;
+    },
+    [fetchTransactionsSummary.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
       state.summaryItems = action.payload;
-  },
-  [fetchTransactionsSummary.rejected](state, action) {
+    },
+    [fetchTransactionsSummary.rejected](state, action) {
       state.isLoading = false;
       state.error = action.payload;
-  },
+    },
 
-  [fetchTransactionsSummaryOfPeriod.pending](state){
-      state.isLoading = true
-  },
-  [fetchTransactionsSummaryOfPeriod.fulfilled](state,action){
+    [fetchTransactionsSummaryOfPeriod.pending](state) {
+      state.isLoading = true;
+    },
+    [fetchTransactionsSummaryOfPeriod.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
       state.summaryItems = action.payload;
-  },
-  [fetchTransactionsSummaryOfPeriod.rejected](state, action){
+    },
+    [fetchTransactionsSummaryOfPeriod.rejected](state, action) {
       state.isLoading = false;
       state.error = action.payload;
-  }
-
+    },
   },
 });
 
