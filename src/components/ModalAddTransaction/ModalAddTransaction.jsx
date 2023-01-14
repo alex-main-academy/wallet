@@ -12,9 +12,6 @@ import { useSelector } from 'react-redux';
 import { selectTransactionCategories } from 'redux/transactions/transactionsSelectors';
 import { formatDate } from 'helpers/formatDate';
 import moment from 'moment';
-import { changeBalance } from 'redux/auth/authSlice';
-
-
 
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
   const [valueDate, onChange] = useState(new Date());
@@ -50,7 +47,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
       case 'amount':
         setAmount(parseInt(value));
         break;
-      
+
       case 'transactionDate':
         setTransactionDate(value);
         break;
@@ -80,8 +77,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
         amount: correctAmmount,
       })
     );
-    
-    dispatch(changeBalance(amount));
 
     setTransactionDate(new Date());
     setType('EXPENSE');
