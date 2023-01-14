@@ -22,9 +22,11 @@ const Header = () => {
             <span className={css.header__logo__text}>Wallet</span>
           </Link>
           <div className={css.header__menu}>
-            <span className={css.header__menu__name}>{userName}</span>
-            <LogoutFeature />
             <LanguageToggler />
+            <div style={{ display: 'flex', gap: 8 }}>
+              <span className={css.header__menu__name}>{userName}</span>
+              <LogoutFeature />
+            </div>
           </div>
         </div>
       </div>

@@ -22,7 +22,6 @@
 }
 @media screen and (max-width: 767px) {
   .wrapper {
-    right: calc(50% - 139px);
-    top: 21px;
+    position: static;
   }
 }

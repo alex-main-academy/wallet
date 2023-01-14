@@ -25,6 +25,9 @@
   .btn_text {
     display: none;
   }
+  .logout_btn {
+    margin-right: 0;
+  }
 }
 
 .backdrop {
@@ -62,9 +65,4 @@
   border: none;
   width: 200px;
   height: 30px;
-}
-@media screen and (max-width: 768px) {
-  .logout_btn {
-    margin-right: 57px;
-  }
 }
