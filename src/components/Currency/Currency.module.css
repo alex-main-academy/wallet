@@ -3,6 +3,7 @@
 }
 
 .table {
+  width: 280px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,10 +25,10 @@
 }
 
 .tableHead {
+  width: 280px;
   height: 50px;
   display: flex;
   background-color: rgba(255, 255, 255, 0.2);
-  width: 100%;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   margin-bottom: 12px;
@@ -69,9 +70,11 @@
 
   .tableHead {
     height: 50px;
+    width: 336px;
+    padding-left: 21px;
   }
   .purchase {
-    margin-right: 80px;
+    margin-right: 76px;
   }
   .currency {
     margin-right: 42px;
@@ -95,6 +98,7 @@
     width: 393px;
   }
   .tableHead {
+    width: 393px;
     padding-left: 21px;
     height: 60px;
     padding: 17px 64px 16px 44px;
