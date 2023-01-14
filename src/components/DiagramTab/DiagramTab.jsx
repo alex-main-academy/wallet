@@ -117,7 +117,6 @@ const DiagramTab = () => {
     const month = params.get('month');
     const year = params.get('year');
 
-    console.log(month);
     if (!month || !year) {
       return;
     }
