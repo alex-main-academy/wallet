@@ -13,17 +13,19 @@ const DashboardPage = () => {
   const isLoading = useSelector(selectIsLoading);
   return (
     <section className={css.dashboard}>
-      <Header />
-      <div className="container">
-        <div className={css.dashboard__content}>
-          <div className={css.dashboard__nav}>
-            <Navigation />
-            <Balance />
-            <ButtonAddTransactions />
-            <Suspense fallback={<Loader />}></Suspense>
-          </div>
-          <div className={css.dashboard__tab}>
-            <Outlet />
+      <div className={css.dashboard__wrapper}>
+        <Header />
+        <div className="container">
+          <div className={css.dashboard__content}>
+            <div className={css.dashboard__nav}>
+              <Navigation />
+              <Balance />
+              <ButtonAddTransactions />
+              <Suspense fallback={<Loader />}></Suspense>
+            </div>
+            <div className={css.dashboard__tab}>
+              <Outlet />
+            </div>
           </div>
         </div>
       </div>
