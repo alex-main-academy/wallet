@@ -3,7 +3,7 @@
 }
 
 .table {
-  width: 280px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +25,6 @@
 }
 
 .tableHead {
-  width: 280px;
   height: 50px;
   display: flex;
   background-color: rgba(255, 255, 255, 0.2);
@@ -40,16 +39,7 @@
   font-size: 18px;
   line-height: 1.55;
 }
-.currency {
-  display: block;
-  width: 71px;
-  margin-right: 25px;
-}
-.purchase {
-  display: block;
-  width: 71px;
-  margin-right: 35px;
-}
+
 .sale {
   display: block;
 }
@@ -60,6 +50,33 @@
   margin-bottom: 12px;
   font-size: 16px;
   line-height: 1.43;
+}
+@media screen and (max-width: 319px) {
+  .tableHead {
+    display: flex;
+    gap: 12px;
+  }
+  .tableValues {
+    gap: 40px;
+  }
+}
+@media screen and (min-width: 320px) {
+  .table {
+    width: 280px;
+  }
+  .tableHead {
+    width: 280px;
+  }
+  .currency {
+    display: block;
+    width: 71px;
+    margin-right: 25px;
+  }
+  .purchase {
+    display: block;
+    width: 71px;
+    margin-right: 35px;
+  }
 }
 
 @media screen and (min-width: 768px) {
