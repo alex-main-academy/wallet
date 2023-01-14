@@ -18,19 +18,26 @@ export const Currency = () => {
         );
         const Currency = [response.data[0], response.data[1]];
         setCurrency(Currency);
-        localStorage.setItem('currency', JSON.stringify(Currency));
         localStorage.setItem('time', `${currentHour + 1}-${currentMinute}`);
+        localStorage.setItem('currency', JSON.stringify(Currency));
       } catch (e) {
         console.log(e);
+        if (currency.length === 0) {
+          setCurrency(JSON.parse(localStorage.getItem('currency')));
+        }
       }
     }
-    const localStorageTime = localStorage.getItem('time');
-    if (localStorageTime < currentTime) {
-      getCurrency();
-    }
 
-    if (currency.length === 0) {
-      setCurrency(JSON.parse(localStorage.getItem('currency')));
+    const localStorageTime = localStorage.getItem('time');
+    if (localStorageTime) {
+      if (localStorageTime > currentTime) {
+        setCurrency(JSON.parse(localStorage.getItem('currency')));
+        return;
+      } else if (localStorageTime <= currentTime) {
+        getCurrency();
+      }
+    } else {
+      getCurrency();
     }
   }, [currency.length]);
 
