@@ -97,6 +97,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     setType('EXPENSE');
     setComment('');
     setAmount('');
+    setCategoryId("")
   };
 
 return (
@@ -179,7 +180,7 @@ return (
               placeholder="0.00"
             />
             <div className={css.inputDatetime}>
-              <Datetime
+              <Datetime className={css.dateText}
                 dateFormat="MM.DD.YYYY"
                 timeFormat={false}
                 name="transactionDate"
