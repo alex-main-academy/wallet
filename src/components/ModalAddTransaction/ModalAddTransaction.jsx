@@ -81,8 +81,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
       })
     );
     
-    dispatch(changeBalance(amount));
-
     setTransactionDate(new Date());
     setType('EXPENSE');
     setCategoryId('');
