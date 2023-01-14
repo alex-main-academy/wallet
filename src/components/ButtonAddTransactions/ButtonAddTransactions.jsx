@@ -15,12 +15,12 @@ const ButtonAddTransactions = () => {
 
   const handleOpenModal = () => {
     setIsModalAddTransactionOpen(true);
-    console.log('clicdfcd');
+
   };
 
   const handleClickClose = () => {
     setIsModalAddTransactionOpen(false);
-    console.log('click');
+    
   };
 
   const handleBackdrop = e => {

@@ -1,4 +1,4 @@
 export const selectTransactionCategories = state =>
-  state.transactionCategories.items;
+  state.transactions.items;
 export const selectTransactionIsLoading = state =>
-  state.transactionCategories.isLoading;
+  state.transactions.isLoading;
