@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTransactionCategories } from 'redux/transactions/transactionsSelectors';
 import { refreshUser } from 'redux/auth/authOperations';
+import FormikDateTime from './FormicDatetime';
 
 
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
@@ -201,11 +202,9 @@ return (
                   className={css.invalidFeedback}
                 />
             <div className={css.inputDatetime}>
-              <Datetime
-                dateFormat="MM.DD.YYYY"
-                timeFormat={false}
-                name="transactionDate"
-              />
+
+              <Field name="transactionDate"  timeFormat={false} component={FormikDateTime}/>
+
               <img className={css.calendarIcon} src={calendar} alt="calendar" />
             </div>
           </div>
