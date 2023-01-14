@@ -12,13 +12,15 @@
 @media screen and (min-width: 1280px) {
   .statisticChart {
     flex-direction: row;
+    height: 100%;
   }
 }
 
 @media screen and (min-width: 320px) {
   .diagram {
-    width: 288px;
+    width: 100%;
     margin: 0 auto;
+    height: 357px;
     margin-bottom: 32px;
   }
 }
@@ -30,6 +32,7 @@
 @media screen and (min-width: 1280px) {
   .diagram {
     width: 280px;
+    margin-right: 20px;
   }
 }
 
@@ -48,6 +51,8 @@
 @media screen and (min-width: 1280px) {
   .diagramTitle {
     margin-top: 32px;
+    
+    margin-bottom: 20px;
   }
 }
 
@@ -58,8 +63,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 148px;
+    position: relative;
+    top: -215px;
     left: calc(50% - (144px / 2));
     /* background-color: rgba(11, 184, 135, 0.3); */
     border-radius: 50%;
@@ -86,14 +91,26 @@
   }
 }
 
+@media screen and (min-width: 320px) {
+
+  .chartItem {
+    margin: 0 auto;
+    padding: 0;
+    
+  }
+}
+
+
+@media screen and (min-width: 1280px) {
 .chartItem {
   margin: 0 auto;
   padding: 0;
-}
+  height: 100%;
+}}
 
 @media screen and (min-width: 320px) {
   .select {
-    width: 336px;
+    width: 100%;
     gap: 32px;
     margin-top: 0px;
   }
@@ -113,7 +130,7 @@
     width: 395px;
     gap: 32px;
     margin: 0 auto;
-    margin-top: 97px;
+    margin-top:97px;
   }
 }
 
@@ -167,8 +184,12 @@
 @media screen and (min-width: 1280px) {
   .chart {
     width: 395px;
+    /* height: calc(100vh - 300px); */
   }
 }
+
+
+
 
 .title {
   display: flex;
@@ -184,6 +205,7 @@
   font-weight: 700;
   margin-bottom: 31px;
   border-radius: 30px;
+  background-color: #FFFFFF;
 }
 
 .titleItem {
@@ -193,12 +215,33 @@
   margin: auto;
   padding-left: 20px;
   padding-right: 20px;
+  
 }
 
+
+
+@media screen and (min-Width: 320px) {
+  .list{
+      height: 100%;
+  }
+}
+
+@media screen and (min-Width: 768px) {
+  .list{
+      max-height: calc(100vh - 700px);
+      overflow-y: scroll;
+  }
+}
+
+@media screen and (min-Width: 1280px) {
 .list {
+  max-height: calc(100vh - 438px);
   width: 100%;
+  overflow-y: scroll;
+}
 }
 
+@media screen and (min-Width: 320px) {
 .listItem {
   display: flex;
   flex-wrap: wrap;
@@ -208,7 +251,7 @@
   /* padding-left: 16px; */
 
   padding-bottom: 14px;
-}
+}}
 
 .expenseItem {
   display: flex;
@@ -241,6 +284,9 @@
 }
 .totalList {
   width: 100%;
+  position: relative;
+  top: 10px
+  
 }
 
 .totalListItem {
