@@ -1,4 +1,6 @@
 import css from './ModalAddTransaction.module.css';
+import { Formik, Form, Field, ErrorMessage} from 'formik';
+import { transactionSchema} from './transaction_validation';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Select from 'react-select';
@@ -14,6 +16,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTransactionCategories } from 'redux/transactions/transactionsSelectors';
 import { refreshUser } from 'redux/auth/authOperations';
+
 
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
   const [transactionDate, setTransactionDate] = useState(new Date());
@@ -80,7 +83,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
         })
       ).unwrap();
       onClose();
-    } catch (rejectedValueOrSerializedError) {
+    } catch (error) {
       toast.error('Something went wrong. Please try again.');
     }
 
@@ -94,7 +97,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
 
   const handleCancelTransaction = () => {
     setTransactionDate(new Date());
-    setType('EXPENSE');
     setComment('');
     setAmount('');
     setCategoryId("")
@@ -111,7 +113,18 @@ return (
           />
         </button>
         <h2 className={css.modalTitle}>Add transaction</h2>
-        <form className={css.modalForm} onSubmit={handlerSubmit}>
+        <Formik onSubmit={handlerSubmit}
+        initialValues={{
+        type: 'EXPENSE',
+        transactionDate: new Date(),
+        amount: '',
+        comment: '',
+        categoryId: '',
+      }}
+      validationSchema={transactionSchema}
+      >
+         {formik => (
+        <Form className={css.modalForm} onChange={handlerSubmit}>
           <div className={css.modalWrappenTransaction}>
             {isToggled ? (
               <p className={css.activeTransactionIncome}>Income</p>
@@ -171,7 +184,7 @@ return (
             />
           )}
           <div className={css.modalWrapper}>
-            <input
+            <Field
               className={css.formInputSum}
               type="number"
               name="amount"
@@ -179,8 +192,13 @@ return (
               onChange={handleNameChange}
               placeholder="0.00"
             />
+            <ErrorMessage
+                  name="amount"
+                  component="div"
+                  className={css.invalidFeedback}
+                />
             <div className={css.inputDatetime}>
-              <Datetime className={css.dateText}
+              <Datetime
                 dateFormat="MM.DD.YYYY"
                 timeFormat={false}
                 name="transactionDate"
@@ -198,11 +216,14 @@ return (
             onChange={handleNameChange}
             placeholder="Comment"
           />
-          <button className={css.btnAdd}>Add </button>
-          <button className={css.btnCancel} onClick={handleCancelTransaction}>
-            Cancel
+          <button className={css.btnAdd}>Add</button>
+        </Form>
+         )}
+        </Formik>
+
+        <button className={css.btnCancel} onClick={handleCancelTransaction}>
+        Cancel
           </button>
-        </form>
       </div>
       <ToastContainer />
     </div>

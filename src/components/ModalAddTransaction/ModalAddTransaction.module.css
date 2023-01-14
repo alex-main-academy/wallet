@@ -185,6 +185,12 @@
 input {
   outline: none;
   border: none;
+  font-family: var(--primary-font);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  color: var(--primary-text-color);
 }
 
 .inputDatetime {
@@ -197,15 +203,6 @@ input {
 
 }
 
-.dateText {
-  font-family: 'Circe';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 27px;
-
-  color: #000000;
-}
 
 .calendarIcon {
   position: absolute;
@@ -268,6 +265,14 @@ input {
   border: transparent;
   cursor: pointer;
   padding: 13px 65px 13px 71px;
+}
+
+.invalidFeedback {
+  position: absolute;
+  color: red;
+  font-size: 0.9rem;
+  top: 35px;
+  left: 50px;
 }
 
 @media screen and (min-width: 767px) {
