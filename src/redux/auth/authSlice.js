@@ -64,4 +64,11 @@ export const auth = createSlice({
       state.isLoading = false;
     },
   },
+  reducers: {
+    changeBalance(state, action) {
+      state.user.balance = state.user.balance-action.payload;
+    },
+  },
 });
+
+export const {changeBalance} = auth.actions

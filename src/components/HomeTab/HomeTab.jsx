@@ -1,27 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
-import s from './HomeTab.module.css';
-import { selectTransactions } from 'redux/transactions/transactionsSelectors';
-import { deleteTransaction } from 'redux/transactions/transactionsOperations';
 import Media from 'react-media';
 import { BsFillTrashFill } from 'react-icons/bs';
-import { useEffect } from 'react';
-import { fetchTransactions } from 'redux/transactions/transactionsOperations';
+import { deleteTransaction } from 'redux/transactions/transactionsOperations';
+import { selectTransactions } from 'redux/transactions/transactionsSelectors';
+import { selectTransactionCategories } from 'redux/transactions/transactionsSelectors';
+import s from './HomeTab.module.css';
+import { changeBalance } from 'redux/auth/authSlice';
 
 const HomeTab = () => {
   const transactions = useSelector(selectTransactions);
-  // const categories = useSelector(selectTransactionCategories);
-  // const categoriesList = categories.map(data => data);
-
+  const categories = useSelector(selectTransactionCategories);
+  const categoriesList = categories.map(data => data);
   const transactionsReverse = [...transactions];
   const dispatch = useDispatch();
 
-  const onDelete = (id) => {
+  const onDelete = (id, amount) => {
     dispatch(deleteTransaction(id));
+    dispatch(changeBalance(amount))
   };
-
-  useEffect(() => {
-    dispatch(fetchTransactions());
-  }, [dispatch]);
 
   return (
     <>
@@ -66,11 +62,10 @@ const HomeTab = () => {
                                 {'Category'}
                               </td>
                               <td>
-                                {/* {categoriesList.length &&
+                                {categoriesList.length &&
                                   categoriesList.find(
                                     cat => cat.id === el.categoryId
-                                  ).name} */}
-                                {el.categoryId}
+                                  ).name}
                               </td>
                             </tr>
                             <tr>
@@ -163,11 +158,10 @@ const HomeTab = () => {
                       <td>{el.transactionDate}</td>
                       <td>{el.type !== 'EXPENSE' ? '+' : '-'}</td>
                       <td>
-                        {/* {categoriesList.length &&
+                        {categoriesList.length &&
                           categoriesList.find(
                             cat => cat.id === el.categoryId
-                          ).name} */}
-                          {el.categoryId}
+                          ).name}
                       </td>
                       <td>{el.comment}</td>
                       <td
