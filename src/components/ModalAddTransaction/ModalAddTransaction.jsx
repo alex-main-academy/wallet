@@ -28,6 +28,13 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
 
   const dispatch = useDispatch();
   const categories = useSelector(selectTransactionCategories);
+  const initialValue ={
+    type: 'EXPENSE',
+    categoryId: '',
+    amount: '',
+    transactionDate: new Date(),
+    comment: '',
+  }
 
   const onToggle = () => {
     setIsToggled(!isToggled);
@@ -47,7 +54,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     const { name, value } = e.target;
     switch (name) {
       case 'amount':
-        setAmount(parseInt(value));
+        setAmount(value);
         break;
 
       case 'comment':
@@ -67,8 +74,8 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     setCategoryId(event.value);
   };
 
-  const handlerSubmit = async e => {
-    e.preventDefault();
+  const handlerSubmit = async (event) => {
+   event.preventDefault()
 
     const correctAmmount = type === 'EXPENSE' ? Number('-' + amount) : amount;
 
@@ -114,27 +121,15 @@ return (
         </button>
         <h2 className={css.modalTitle}>Add transaction</h2>
         <Formik
-        initialValues={{
-        type: 'EXPENSE',
-        transactionDate: new Date(),
-        amount: '',
-        comment: '',
-        categoryId: '',
-      }}
-      validationSchema={transactionSchema}
-      onSubmit={(values, { resetForm }) => {
-        dispatch(
-          addTransaction({
-            transactionDate: values.transactionDate,
-            categoryId: values.categoryId,
-            amount: values.amount,
-          })
-        );
-        resetForm();
+        initialValues={initialValue}
+      validator={() => ({})}
+      onSubmit={values => {
+        // same shape as initial values
+        console.log(values);
       }}
       >
          {formik => (
-        <Form className={css.modalForm}  >
+        <Form>
           <div className={css.modalWrappenTransaction}>
             {isToggled ? (
               <p className={css.activeTransactionIncome}>Income</p>
