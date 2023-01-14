@@ -12,8 +12,11 @@ import { useSelector } from 'react-redux';
 import { selectTransactionCategories } from 'redux/transactions/transactionsSelectors';
 import { formatDate } from 'helpers/formatDate';
 import moment from 'moment';
+import translation from 'assets/translation/add_transaction.json';
+import { translationSelector } from 'redux/translation/translationSelectors';
 
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
+  const language = useSelector(translationSelector);
   const [valueDate, onChange] = useState(new Date());
   const [transactionDate, setTransactionDate] = useState(
     formatDate(moment(valueDate).format())
@@ -95,13 +98,17 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
             alt="close"
           />
         </button>
-        <h2 className={css.modalTitle}>Add transaction</h2>
+        <h2 className={css.modalTitle}>{translation[language].add}</h2>
         <form className={css.modalForm} onSubmit={handlerSubmit}>
           <div className={css.modalWrappenTransaction}>
             {isToggled ? (
-              <p className={css.activeTransactionIncome}>Income</p>
+              <p className={css.activeTransactionIncome}>
+                {translation[language].income}
+              </p>
             ) : (
-              <p className={css.modalTransactionIncome}>Income</p>
+              <p className={css.modalTransactionIncome}>
+                {translation[language].income}
+              </p>
             )}
             <label className={css.toggleSwitch}>
               <input
@@ -113,9 +120,13 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
               <span className={css.switch} />
             </label>
             {isToggled ? (
-              <p className={css.modalTransactionExpense}>Expense</p>
+              <p className={css.modalTransactionExpense}>
+                {translation[language].expense}
+              </p>
             ) : (
-              <p className={css.activeTransactionExpense}>Expense</p>
+              <p className={css.activeTransactionExpense}>
+                {translation[language].expense}
+              </p>
             )}
           </div>
           {!isToggled && (
@@ -126,7 +137,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
               onChange={handleNameChange}
             >
               <option disabled hidden>
-                Select a category
+                {translation[language].select}
               </option>
               {categories
                 .filter(category => category.type === type)
@@ -170,10 +181,14 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
             name="comment"
             value={comment}
             onChange={handleNameChange}
-            placeholder="Comment"
+            placeholder={translation[language].comment}
           />
-          <button className={css.btnAdd}>Add </button>
-          <button className={css.btnCancel}>Cancel</button>
+          <button className={css.btnAdd}>
+            {translation[language].add_word}
+          </button>
+          <button className={css.btnCancel}>
+            {translation[language].cancel}
+          </button>
         </form>
       </div>
     </div>
