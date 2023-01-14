@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 import { Suspense } from 'react';
 import { selectIsLoading } from 'redux/transactions/transactionsSelectors';
 import { Currency } from 'components/Currency/Currency';
+import Media from 'react-media';
+
 const DashboardPage = () => {
   const isLoading = useSelector(selectIsLoading);
   return (
@@ -18,9 +20,13 @@ const DashboardPage = () => {
         <div className="container">
           <div className={css.dashboard__content}>
             <div className={css.dashboard__nav}>
-              <Navigation />
-              <Balance />
-              <Currency />
+              <div>
+                <Navigation />
+                <Balance />
+              </div>
+              <div className={css.dashboard__currency}>
+                <Media query="(min-width:768px)" render={() => <Currency />} />
+              </div>
               <ButtonAddTransactions />
               <Suspense fallback={<Loader />}></Suspense>
             </div>
