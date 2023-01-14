@@ -113,7 +113,7 @@ return (
           />
         </button>
         <h2 className={css.modalTitle}>Add transaction</h2>
-        <Formik onSubmit={handlerSubmit}
+        <Formik
         initialValues={{
         type: 'EXPENSE',
         transactionDate: new Date(),
@@ -122,9 +122,19 @@ return (
         categoryId: '',
       }}
       validationSchema={transactionSchema}
+      onSubmit={(values, { resetForm }) => {
+        dispatch(
+          addTransaction({
+            transactionDate: values.transactionDate,
+            categoryId: values.categoryId,
+            amount: values.amount,
+          })
+        );
+        resetForm();
+      }}
       >
          {formik => (
-        <Form className={css.modalForm} onChange={handlerSubmit}>
+        <Form className={css.modalForm}  >
           <div className={css.modalWrappenTransaction}>
             {isToggled ? (
               <p className={css.activeTransactionIncome}>Income</p>
@@ -216,7 +226,7 @@ return (
             onChange={handleNameChange}
             placeholder="Comment"
           />
-          <button className={css.btnAdd}>Add</button>
+          <button className={css.btnAdd} type="submit">Add</button>
         </Form>
          )}
         </Formik>
