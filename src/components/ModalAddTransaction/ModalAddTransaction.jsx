@@ -1,4 +1,7 @@
 import css from './ModalAddTransaction.module.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Select from 'react-select';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import calendar from './images/calendar.svg';
@@ -10,6 +13,7 @@ import { fetchTransactionCategories } from 'redux/transactions/transactionsOpera
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTransactionCategories } from 'redux/transactions/transactionsSelectors';
+import { refreshUser } from 'redux/auth/authOperations';
 
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
   const [transactionDate, setTransactionDate] = useState(new Date());
@@ -47,33 +51,40 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
         setComment(value);
         break;
 
-      case 'categoryId':
-        setCategoryId(value);
-        break;
-
       default:
         return;
     }
   };
 
   const handleChangeDate = event => {
-    console.log(event);
     setTransactionDate(event);
   };
 
-  const handlerSubmit = e => {
-    e.preventDefault();
-    const correctAmmount = type === 'EXPENSE' ? Number('-' + amount) : amount;
-    dispatch(
-      addTransaction({
-        transactionDate,
-        type,
-        categoryId,
-        comment,
-        amount: correctAmmount,
-      })
-    );
+  const handleChangeCategories = event => {
+    setCategoryId(event.value);
+  };
 
+  const handlerSubmit = async e => {
+    e.preventDefault();
+
+    const correctAmmount = type === 'EXPENSE' ? Number('-' + amount) : amount;
+
+    try {
+      await dispatch(
+        addTransaction({
+          transactionDate,
+          type,
+          categoryId,
+          comment,
+          amount: correctAmmount,
+        })
+      ).unwrap();
+      onClose();
+    } catch (rejectedValueOrSerializedError) {
+      toast.error('Something went wrong. Please try again.');
+    }
+
+    dispatch(refreshUser());
     setTransactionDate(new Date());
     setType('EXPENSE');
     setCategoryId('');
@@ -81,7 +92,14 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     setAmount('');
   };
 
-  return (
+  const handleCancelTransaction = () => {
+    setTransactionDate(new Date());
+    setType('EXPENSE');
+    setComment('');
+    setAmount('');
+  };
+
+return (
     <div className={css.overlay} onClick={onClickBackdrop}>
       <div className={css.modal}>
         <button type="button" className={css.modalCloseBtn} onClick={onClose}>
@@ -115,27 +133,41 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
             )}
           </div>
           {!isToggled && (
-            <select
+            <Select
               className={css.modalSelect}
-              name="categoryId"
-              defaultValue="Select a category"
-              onChange={handleNameChange}
-            >
-              <option disabled hidden>
-                Select a category
-              </option>
-              {categories
+              placeholder={
+                <div className={css.selectPlaceholderText}>
+                  Select a category
+                </div>
+              }
+              onChange={handleChangeCategories}
+              options={categories
                 .filter(category => category.type === type)
-                .map(category => (
-                  <option
-                    className={css.categoriesSelect}
-                    key={category.id}
-                    value={category.id}
-                  >
-                    {category.name}
-                  </option>
-                ))}
-            </select>
+                .map(category => ({
+                  value: category.id,
+                  label: category.name,
+                }))}
+              theme={theme => ({
+                ...theme,
+                borderRadius: '20px',
+                background: 'rgba(255, 255, 255, 0.7)',
+                boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.1)',
+                colors: {
+                  ...theme.colors,
+                  text: '#FF6596',
+                  primary25: 'white',
+                  primary: '#FF6596',
+                },
+              })}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  border: 'none',
+                  borderBottom: ' 1px solid #e0e0e0',
+                  outline: 'none',
+                }),
+              }}
+            />
           )}
           <div className={css.modalWrapper}>
             <input
@@ -166,9 +198,12 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
             placeholder="Comment"
           />
           <button className={css.btnAdd}>Add </button>
-          <button className={css.btnCancel}>Cancel</button>
+          <button className={css.btnCancel} onClick={handleCancelTransaction}>
+            Cancel
+          </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
