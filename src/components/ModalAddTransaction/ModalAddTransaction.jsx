@@ -10,9 +10,17 @@ import { fetchTransactionCategories } from 'redux/transactions/transactionsOpera
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTransactionCategories } from 'redux/transactions/transactionsSelectors';
+import { formatDate } from 'helpers/formatDate';
+import moment from 'moment';
+import { changeBalance } from 'redux/auth/authSlice';
+
+
 
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
-  const [transactionDate, setTransactionDate] = useState(new Date());
+  const [valueDate, onChange] = useState(new Date());
+  const [transactionDate, setTransactionDate] = useState(
+    formatDate(moment(valueDate).format())
+  );
   const [amount, setAmount] = useState('');
   const [comment, setComment] = useState('');
   const [type, setType] = useState('EXPENSE');
@@ -42,6 +50,10 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
       case 'amount':
         setAmount(parseInt(value));
         break;
+      
+      case 'transactionDate':
+        setTransactionDate(value);
+        break;
 
       case 'comment':
         setComment(value);
@@ -56,11 +68,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     }
   };
 
-  const handleChangeDate = event => {
-    console.log(event);
-    setTransactionDate(event);
-  };
-
   const handlerSubmit = e => {
     e.preventDefault();
     const correctAmmount = type === 'EXPENSE' ? Number('-' + amount) : amount;
@@ -73,6 +80,8 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
         amount: correctAmmount,
       })
     );
+    
+    dispatch(changeBalance(amount));
 
     setTransactionDate(new Date());
     setType('EXPENSE');
@@ -148,11 +157,14 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
             />
             <div className={css.inputDatetime}>
               <Datetime
-                dateFormat="MM.DD.YYYY"
+                dateFormat="YYYY.MM.DD"
                 timeFormat={false}
                 name="transactionDate"
-                value={transactionDate}
-                onChange={handleChangeDate}
+                value={valueDate}
+                onChange={onChange}
+                onClose={value =>
+                  setTransactionDate(formatDate(moment(value).format()))
+                }
               />
               <img className={css.calendarIcon} src={calendar} alt="calendar" />
             </div>
