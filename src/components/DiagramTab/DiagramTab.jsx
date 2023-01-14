@@ -36,7 +36,7 @@ const DiagramTab = () => {
   // const [month, setMonth] = useState(today.getMonth());
   // const [year, SetYear] = useState(today.getFullYear());
   const dispatch = useDispatch();
-  // const dataBASE = useSelector(selectStatistic);
+  const dataBASE = useSelector(selectStatistic);
 
   const [params, setParams] = useSearchParams();
 
@@ -48,60 +48,7 @@ const DiagramTab = () => {
 
 
 
-  const dataBASE = {
-    categoriesSummary: [
-      {
-        name: 'Income',
-        type: 'INCOME',
-        total: 4000,
-      },
-      {
-        name: 'Education',
-        type: 'EXPENSE',
-        total: -274,
-      },
-      {
-        name: 'Household products',
-        type: 'EXPENSE',
-        total: -284,
-      },
-      {
-        name: 'Products',
-        type: 'EXPENSE',
-        total: -700,
-      },
-      {
-        name: 'Car',
-        type: 'EXPENSE',
-        total: -70,
-      },
-      {
-        name: 'Child care',
-        type: 'EXPENSE',
-        total: -285,
-      },
-      {
-        name: 'Self care',
-        type: 'EXPENSE',
-        total: -28,
-      },
-      {
-        name: 'Leisure',
-        type: 'EXPENSE',
-        total: -480,
-      },
-      {
-        name: 'Main expenses',
-        type: 'EXPENSE',
-        total: -2000,
-      },
-    ],
-    incomeSummary: 4000,
-    expenseSummary: -3245,
-    periodTotal: 755,
-    year: null,
-    month: null,
-  };
+  
 
   if (dataBASE.categoriesSummary) {
     if (dataBASE.categoriesSummary.length !== 0) {
