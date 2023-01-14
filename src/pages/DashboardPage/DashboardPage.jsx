@@ -5,13 +5,19 @@ import Navigation from 'components/Navigation/Navigation';
 import css from './DashboardPage.module.css';
 import ButtonAddTransactions from 'components/ButtonAddTransactions/ButtonAddTransactions';
 import Loader from 'components/Loader/Loader';
-import { useSelector } from 'react-redux';
-import { Suspense } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Suspense, useEffect } from 'react';
 import { selectIsLoading } from 'redux/transactions/transactionsSelectors';
 import { Currency } from 'components/Currency/Currency';
 import Media from 'react-media';
+import { fetchTransactions } from 'redux/transactions/transactionsOperations';
 
 const DashboardPage = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
+
   const isLoading = useSelector(selectIsLoading);
   return (
     <section className={css.dashboard}>
