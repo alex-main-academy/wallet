@@ -5,6 +5,7 @@ import { Circles } from 'react-loader-spinner';
 
 export const Currency = () => {
   const [currency, setCurrency] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const date = new Date();
@@ -18,19 +19,24 @@ export const Currency = () => {
         );
         const Currency = [response.data[0], response.data[1]];
         setCurrency(Currency);
-        localStorage.setItem('currency', JSON.stringify(Currency));
         localStorage.setItem('time', `${currentHour + 1}-${currentMinute}`);
+        localStorage.setItem('currency', JSON.stringify(Currency));
       } catch (e) {
         console.log(e);
+        setError(true);
+        if (currency.length === 0) {
+          setCurrency(JSON.parse(localStorage.getItem('currency')));
+        }
       }
     }
-    const localStorageTime = localStorage.getItem('time');
-    if (localStorageTime < currentTime) {
-      getCurrency();
-    }
 
-    if (currency.length === 0) {
-      setCurrency(JSON.parse(localStorage.getItem('currency')));
+    const localStorageTime = localStorage.getItem('time');
+    if (localStorageTime) {
+      if (localStorageTime <= currentTime) {
+        return;
+      }
+    } else {
+      getCurrency();
     }
   }, [currency.length]);
 
