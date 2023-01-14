@@ -30,8 +30,8 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
   const categories = useSelector(selectTransactionCategories);
   const initialValue ={
     type: 'EXPENSE',
-    categoryId: '',
     amount: '',
+    categoryId: '',
     transactionDate: new Date(),
     comment: '',
   }
@@ -139,6 +139,7 @@ return (
             <label className={css.toggleSwitch}>
               <input
                 type="checkbox"
+                name='type'
                 value={type}
                 checked={isToggled}
                 onChange={onToggle}
@@ -159,7 +160,6 @@ return (
                   Select a category
                 </div>
               }
-              onChange={handleChangeCategories}
               options={categories
                 .filter(category => category.type === type)
                 .map(category => ({
@@ -193,8 +193,6 @@ return (
               className={css.formInputSum}
               type="number"
               name="amount"
-              value={amount}
-              onChange={handleNameChange}
               placeholder="0.00"
             />
             <ErrorMessage
@@ -207,18 +205,14 @@ return (
                 dateFormat="MM.DD.YYYY"
                 timeFormat={false}
                 name="transactionDate"
-                value={transactionDate}
-                onChange={handleChangeDate}
               />
               <img className={css.calendarIcon} src={calendar} alt="calendar" />
             </div>
           </div>
-          <input
+          <Field
             className={css.inputCommentText}
             type="text"
             name="comment"
-            value={comment}
-            onChange={handleNameChange}
             placeholder="Comment"
           />
           <button className={css.btnAdd} type="submit">Add</button>
