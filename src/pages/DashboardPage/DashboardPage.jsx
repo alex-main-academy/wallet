@@ -11,12 +11,18 @@ import { selectIsLoading } from 'redux/transactions/transactionsSelectors';
 import { Currency } from 'components/Currency/Currency';
 import Media from 'react-media';
 import { fetchTransactions } from 'redux/transactions/transactionsOperations';
+import { fetchTransactionCategories } from 'redux/transactions/transactionsOperations';
 
 const DashboardPage = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchTransactions());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchTransactionCategories())
+  }, [dispatch])
+  
 
   const isLoading = useSelector(selectIsLoading);
   return (
