@@ -46,10 +46,6 @@ const DiagramTab = () => {
   let visible = false;
   let data = null;
 
-
-
-  
-
   if (dataBASE.categoriesSummary) {
     if (dataBASE.categoriesSummary.length !== 0) {
       visible = true;
@@ -175,7 +171,7 @@ const DiagramTab = () => {
             className={styles.selectItem}
             name="month"
             id="month"
-            value={month}
+            defaultValue={month}
             onChange={onChanged}
           >
             <option value="january">January</option>
@@ -195,7 +191,7 @@ const DiagramTab = () => {
             className={styles.selectItem}
             name="year"
             id="year"
-            value={year}
+            defaultValue={year}
             onChange={onChanged}
           >
             <option value="2019">2019</option>
