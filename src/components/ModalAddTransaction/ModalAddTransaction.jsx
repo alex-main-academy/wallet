@@ -159,7 +159,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
                           }))}
                         theme={theme => ({
                           ...theme,
-                          borderRadius: '20px',
                           background: 'rgba(255, 255, 255, 0.7)',
                           boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.1)',
                           colors: {

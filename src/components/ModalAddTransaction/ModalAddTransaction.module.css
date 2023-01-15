@@ -285,6 +285,7 @@ position: relative;
   left: 27px;
 }
 
+
 @media screen and (min-width: 767px) {
   .modal {
     max-width: 540px;
