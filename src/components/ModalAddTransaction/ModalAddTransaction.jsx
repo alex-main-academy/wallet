@@ -18,14 +18,18 @@ import { refreshUser } from 'redux/auth/authOperations';
 import FormikDateTime from './FormicDatetime';
 
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
-
   const [type, setType] = useState('EXPENSE');
-  const [categoryId, setCategoryId] = useState('');
   const [isToggled, setIsToggled] = useState(false);
-
   const dispatch = useDispatch();
   const categories = useSelector(selectTransactionCategories);
 
+  const initialValue = {
+    type: 'EXPENSE',
+    amount: '',
+    categoryId: '',
+    transactionDate: new Date(),
+    comment: '',
+  };
   const onToggle = (setFieldValue, resetForm, values) => {
     setIsToggled(!isToggled);
     console.log(values.target.checked);
@@ -33,7 +37,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
       setType(type);
     } else {
       setType('INCOME');
-      setCategoryId(categoryId);
     }
 
     resetForm();
@@ -50,9 +53,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     categoryId,
     comment,
     amount,
-  }, resetForm) => {
-
-
+  }) => {
     const correctAmmount = type === 'EXPENSE' ? Number('-' + amount) : amount;
 
     try {
@@ -60,7 +61,10 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
         addTransaction({
           transactionDate: new Date(transactionDate),
           type,
-          categoryId,
+          categoryId:
+            type === 'INCOME'
+              ? '063f1132-ba5d-42b4-951d-44011ca46262'
+              : categoryId,
           comment,
           amount: correctAmmount,
         })
@@ -71,15 +75,20 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     }
 
     dispatch(refreshUser());
-    resetForm();
-
   };
 
-
-  const handleCancel = (e) => {
-
-    console.log(handleCancel)
-};
+  function validateSelect(value) {
+    let error;
+    console.log(value);
+    if (!value) {
+      error = 'category is a required field';
+    }
+    return error;
+  }
+  const handleCancel = e => {
+    e.preventDefault();
+    console.log('click');
+  };
 
   return (
     <div className={css.overlay} onClick={onClickBackdrop}>
@@ -93,16 +102,12 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
         </button>
         <h2 className={css.modalTitle}>Add transaction</h2>
         <Formik
-          initialValues={{
-            type: 'EXPENSE',
-            amount: '',
-            categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-            transactionDate: new Date(),
-            comment: '',
-          }}
+          initialValues={initialValue}
           validationSchema={transactionSchema}
-          onSubmit={(values) => {
+          onSubmit={(values, { resetForm }) => {
             handlerSubmit(values);
+            console.log(values);
+            resetForm();
           }}
         >
           {formik => (
@@ -131,53 +136,58 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
                 )}
               </div>
               {!isToggled && (
-                <Field name="categoryId">
-                  {({ field, form }) => (
-                    <Select
-                      onChange={selectedOption =>
-                        form.setFieldValue('categoryId', selectedOption.value)
-                      }
-                      className={css.modalSelect}
-                      placeholder={
-                        <div className={css.selectPlaceholderText}>
-                          Select a category
-                        </div>
-                      }
-                      options={categories
-                        .filter(category => category.type === form.values.type)
-                        .map(category => ({
-                          value: category.id,
-                          label: category.name,
-                        }))}
-                      theme={theme => ({
-                        ...theme,
-                        borderRadius: '20px',
-                        background: 'rgba(255, 255, 255, 0.7)',
-                        boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.1)',
-                        colors: {
-                          ...theme.colors,
-                          text: '#FF6596',
-                          primary25: 'white',
-                          primary: '#FF6596',
-                        },
-                      })}
-                      styles={{
-                        control: (baseStyles, state) => ({
-                          ...baseStyles,
-                          border: 'none',
-                          borderBottom: ' 1px solid #e0e0e0',
-                          outline: 'none',
-                        }),
-                      }}
-                    />
-                  )}
-                </Field>
+                <div>
+                  <Field name="categoryId" validate={validateSelect}>
+                    {({ field, form }) => (
+                      <Select
+                        onChange={selectedOption =>
+                          form.setFieldValue('categoryId', selectedOption.value)
+                        }
+                        className={css.modalSelect}
+                        placeholder={
+                          <div className={css.selectPlaceholderText}>
+                            Select a category
+                          </div>
+                        }
+                        options={categories
+                          .filter(
+                            category => category.type === form.values.type
+                          )
+                          .map(category => ({
+                            value: category.id,
+                            label: category.name,
+                          }))}
+                        theme={theme => ({
+                          ...theme,
+                          borderRadius: '20px',
+                          background: 'rgba(255, 255, 255, 0.7)',
+                          boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.1)',
+                          colors: {
+                            ...theme.colors,
+                            text: '#FF6596',
+                            primary25: 'white',
+                            primary: '#FF6596',
+                          },
+                        })}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            border: 'none',
+                            borderBottom: ' 1px solid #e0e0e0',
+                            outline: 'none',
+                          }),
+                        }}
+                      />
+                    )}
+                  </Field>
+                  <ErrorMessage
+                    name="categoryId"
+                    component="div"
+                    className={css.invalidFeedbackSelect}
+                  />
+                </div>
               )}
-              <ErrorMessage
-                name="categoryId"
-                component="div"
-                className={css.invalidFeedback}
-              />
+
               <div className={css.modalWrapper}>
                 <Field
                   className={css.formInputSum}
@@ -214,14 +224,22 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
                 name="comment"
                 placeholder="Comment"
               />
-              <button className={css.btnAdd} type="submit">
+              <button
+                className={css.btnAdd}
+                type="submit"
+                onClick={() =>
+                  !isToggled ? formik.validateField('categoryId') : null
+                }
+              >
                 Add
               </button>
             </Form>
           )}
         </Formik>
 
-        <button className={css.btnCancel} onClick={handleCancel}>Cancel</button>
+        <button className={css.btnCancel} type="reset" onClick={handleCancel}>
+          Cancel
+        </button>
       </div>
       <ToastContainer />
     </div>

@@ -155,19 +155,16 @@
   color: var(--gray-text-color);
 }
 
-/* .modalSelect {
-  width: 100%;
-  margin-bottom: 40px;
-  font-family: var(--primary-font);
-  font-size: 18px;
-  line-height: 1.5;
-  cursor: pointer;
-  padding: 8px 10px;
-  outline: transparent;
-  border: none;
-  border-bottom: 1px solid #e0e0e0;
-  color: var(--gray-text-color);
-} */
+.modalSelect {
+  position: relative;
+}
+.invalidFeedbackSelect {
+  position: absolute;
+  color: red;
+  font-size: 0.9rem;
+  top: 41%;
+  left: 33%;
+}
 
 .formInputSum {
   width: 100%;
