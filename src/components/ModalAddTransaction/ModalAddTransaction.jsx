@@ -4,7 +4,6 @@ import { transactionSchema} from './transaction_validation';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Select from 'react-select';
-import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import calendar from './images/calendar.svg';
 import modalCloseIcon from './images/close.svg';
@@ -20,22 +19,16 @@ import FormikDateTime from './FormicDatetime';
 
 
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
-  const [transactionDate, setTransactionDate] = useState(new Date());
-  const [amount, setAmount] = useState('');
-  const [comment, setComment] = useState('');
+  // const [transactionDate, setTransactionDate] = useState(new Date());
+  // const [amount, setAmount] = useState('');
+  // const [comment, setComment] = useState('');
   const [type, setType] = useState('EXPENSE');
-  const [categoryId, setCategoryId] = useState('');
+  const [categoryId, setCategoryId] = useState('063f1132-ba5d-42b4-951d-44011ca46262');
   const [isToggled, setIsToggled] = useState(false);
 
   const dispatch = useDispatch();
   const categories = useSelector(selectTransactionCategories);
-  const initialValue ={
-    type: 'EXPENSE',
-    amount: '',
-    categoryId: '',
-    transactionDate: new Date(),
-    comment: '',
-  }
+
 
   const onToggle = () => {
     setIsToggled(!isToggled);
@@ -43,7 +36,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
       setType('EXPENSE');
     } else {
       setType('INCOME');
-      setCategoryId('063f1132-ba5d-42b4-951d-44011ca46262');
+      setCategoryId(categoryId);
     }
   };
 
@@ -51,39 +44,43 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     dispatch(fetchTransactionCategories());
   }, [dispatch]);
 
-  const handleNameChange = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'amount':
-        setAmount(value);
-        break;
+  // const handleNameChange = e => {
+  //   const { name, value } = e.target;
+  //   switch (name) {
+  //     case 'amount':
+  //       setAmount(value);
+  //       break;
 
-      case 'comment':
-        setComment(value);
-        break;
+  //     case 'comment':
+  //       setComment(value);
+  //       break;
 
-      default:
-        return;
-    }
-  };
+  //     default:
+  //       return;
+  //   }
+  // };
 
-  const handleChangeDate = event => {
-    setTransactionDate(event);
-  };
+  // const handleChangeDate = event => {
+  //   setTransactionDate(event);
+  // };
 
-  const handleChangeCategories = event => {
-    setCategoryId(event.value);
-  };
+  // const handleChangeCategories = event => {
+  //   setCategoryId(event.value);
+  // };
 
-  const handlerSubmit = async (event) => {
-   event.preventDefault()
+  const handlerSubmit = async ({
+    transactionDate,
+    type,
+    categoryId,
+    comment,
+    amount}) => {
 
     const correctAmmount = type === 'EXPENSE' ? Number('-' + amount) : amount;
 
     try {
       await dispatch(
         addTransaction({
-          transactionDate,
+          transactionDate: new Date(),
           type,
           categoryId,
           comment,
@@ -96,19 +93,13 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     }
 
     dispatch(refreshUser());
-    setTransactionDate(new Date());
-    setType('EXPENSE');
-    setCategoryId('');
-    setComment('');
-    setAmount('');
+    // setTransactionDate(new Date());
+    // setType('EXPENSE');
+    // setCategoryId('');
+    // setComment('');
+    // setAmount('');
   };
 
-  const handleCancelTransaction = () => {
-    setTransactionDate(new Date());
-    setComment('');
-    setAmount('');
-    setCategoryId("")
-  };
 
 return (
     <div className={css.overlay} onClick={onClickBackdrop}>
@@ -122,15 +113,22 @@ return (
         </button>
         <h2 className={css.modalTitle}>Add transaction</h2>
         <Formik
-        initialValues={initialValue}
-      validator={() => ({})}
-      onSubmit={values => {
-        // same shape as initial values
-        console.log(values);
-      }}
-      >
+        initialValues={{
+        type: 'EXPENSE',
+        amount: '',
+        categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
+        transactionDate: new Date(),
+        comment: '',}}
+        validationSchema={transactionSchema}
+        onSubmit={(values, { setSubmitting,resetForm }) =>
+        {
+            handlerSubmit(values);
+            setSubmitting(false);
+            resetForm()
+        }}
+        >
          {formik => (
-        <Form>
+        <Form >
           <div className={css.modalWrappenTransaction}>
             {isToggled ? (
               <p className={css.activeTransactionIncome}>Income</p>
@@ -154,7 +152,10 @@ return (
             )}
           </div>
           {!isToggled && (
+            <Field name="categoryId">
+             {({field,form})=>(
             <Select
+            onChange={(selectedOption)=> form.setFieldValue('categoryId',selectedOption.value)}
               className={css.modalSelect}
               placeholder={
                 <div className={css.selectPlaceholderText}>
@@ -187,8 +188,14 @@ return (
                   outline: 'none',
                 }),
               }}
-            />
+            />)}
+            </Field>
           )}
+           <ErrorMessage
+                  name="categoryId"
+                  component="div"
+                  className={css.invalidFeedback}
+                />
           <div className={css.modalWrapper}>
             <Field
               className={css.formInputSum}
@@ -202,9 +209,12 @@ return (
                   className={css.invalidFeedback}
                 />
             <div className={css.inputDatetime}>
-
               <Field name="transactionDate"  timeFormat={false} component={FormikDateTime}/>
-
+              <ErrorMessage
+                  name="transactionDate"
+                  component="div"
+                  className={css.invalidFeedback}
+                />
               <img className={css.calendarIcon} src={calendar} alt="calendar" />
             </div>
           </div>
@@ -219,7 +229,7 @@ return (
          )}
         </Formik>
 
-        <button className={css.btnCancel} onClick={handleCancelTransaction}>
+        <button className={css.btnCancel} >
         Cancel
           </button>
       </div>

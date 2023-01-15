@@ -267,13 +267,18 @@ input {
   padding: 13px 65px 13px 71px;
 }
 
+.modalWrapper {
+position: relative;
+}
+
 .invalidFeedback {
   position: absolute;
   color: red;
   font-size: 0.9rem;
-  top: 35px;
-  left: 50px;
+  top: 90px;
+  left: 17px;
 }
+
 
 @media screen and (min-width: 767px) {
   .modal {
