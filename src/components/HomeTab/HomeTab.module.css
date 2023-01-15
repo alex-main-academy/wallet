@@ -109,7 +109,7 @@
 }
 
 .scrollTableBodyMob {
-  height: 60vh;
+  height: calc(100vh - 337px);
   overflow-x: hidden;
   margin-top: 0px;
   margin-bottom: 20px;
