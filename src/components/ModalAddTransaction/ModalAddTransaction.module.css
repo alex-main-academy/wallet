@@ -162,8 +162,8 @@
   position: absolute;
   color: red;
   font-size: 0.9rem;
-  top: 41%;
-  left: 33%;
+  top: 30%;
+  left: 23%;
 }
 
 .formInputSum {
@@ -272,8 +272,8 @@ position: relative;
   position: absolute;
   color: red;
   font-size: 0.9rem;
-  top: 90px;
-  left: 17px;
+  top: 85px;
+  left: 68px;
 }
 
 
@@ -308,4 +308,15 @@ position: relative;
   .inputCommentText {
     height: 32px;
   }
+  .invalidFeedbackSelect {
+    top: 41%;
+    left: 33%;
+  }
+
+  .invalidFeedback {
+    top: 90px;
+    left: 17px;
+  }
+
+
 }
