@@ -1,4 +1,5 @@
 import css from './ModalAddTransaction.module.css';
+import moment from 'moment';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { transactionSchema } from './transaction_validation';
 import { toast, ToastContainer } from 'react-toastify';
@@ -20,14 +21,16 @@ import FormikDateTime from './FormicDatetime';
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
   const [type, setType] = useState('EXPENSE');
   const [isToggled, setIsToggled] = useState(false);
+
   const dispatch = useDispatch();
   const categories = useSelector(selectTransactionCategories);
+
 
   const initialValue = {
     type: 'EXPENSE',
     amount: '',
     categoryId: '',
-    transactionDate: new Date(),
+    transactionDate: moment(),
     comment: '',
   };
   const onToggle = (setFieldValue, resetForm, values) => {
@@ -59,7 +62,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
     try {
       await dispatch(
         addTransaction({
-          transactionDate: new Date(transactionDate),
+          transactionDate: moment(transactionDate).utc(true),
           type,
           categoryId:
             type === 'INCOME'
@@ -67,27 +70,27 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
               : categoryId,
           comment,
           amount: correctAmmount,
+
         })
       ).unwrap();
       onClose();
+
     } catch (error) {
       toast.error('Something went wrong. Please try again.');
     }
+
 
     dispatch(refreshUser());
   };
 
   function validateSelect(value) {
     let error;
-    console.log(value);
     if (!value) {
       error = 'category is a required field';
     }
     return error;
   }
-  const handleCancel = e => {
-    e.preventDefault();
-  };
+
 
   return (
     <div className={css.overlay} onClick={onClickBackdrop}>
@@ -103,13 +106,13 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
         <Formik
           initialValues={initialValue}
           validationSchema={transactionSchema}
-          onSubmit={(values, { resetForm }) => {
+          onSubmit={(values, actions) => {
             handlerSubmit(values);
-            resetForm();
+            actions.resetForm({ values: initialValue() });
           }}
         >
           {formik => (
-            <Form>
+            <Form >
               <div className={css.modalWrappenTransaction}>
                 {isToggled ? (
                   <p className={css.activeTransactionIncome}>Income</p>
@@ -157,14 +160,13 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
                           }))}
                         theme={theme => ({
                           ...theme,
-
-                          background: 'rgba(255, 255, 255, 0.7)',
                           boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.1)',
                           colors: {
                             ...theme.colors,
                             text: '#FF6596',
                             primary25: 'white',
                             primary: '#FF6596',
+                            background: 'rgba(255, 255, 255, 0.7)',
                           },
                         })}
                         styles={{
@@ -203,6 +205,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
                     name="transactionDate"
                     timeFormat={false}
                     component={FormikDateTime}
+
                   />
                   <ErrorMessage
                     name="transactionDate"
@@ -231,13 +234,15 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
               >
                 Add
               </button>
+              <button
+                className={css.btnCancel}
+                onClick={onClose}
+              >
+                Cancel
+              </button>
             </Form>
           )}
         </Formik>
-
-        <button className={css.btnCancel} type="submit" onClick={handleCancel}>
-          Cancel
-        </button>
       </div>
       <ToastContainer />
     </div>

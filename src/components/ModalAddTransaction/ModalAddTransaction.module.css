@@ -157,7 +157,9 @@
 
 .modalSelect {
   position: relative;
+  
 }
+
 .invalidFeedbackSelect {
   position: absolute;
   color: red;
