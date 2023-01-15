@@ -3,7 +3,6 @@ import Balance from 'components/Balance/Balance';
 import Header from 'components/Header/Header';
 import Navigation from 'components/Navigation/Navigation';
 import css from './DashboardPage.module.css';
-import ButtonAddTransactions from 'components/ButtonAddTransactions/ButtonAddTransactions';
 import Loader from 'components/Loader/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { Suspense, useEffect } from 'react';
@@ -22,7 +21,7 @@ const DashboardPage = () => {
   useEffect(() => {
     dispatch(fetchTransactionCategories())
   }, [dispatch])
-  
+
 
   const isLoading = useSelector(selectIsLoading);
   return (
@@ -39,7 +38,6 @@ const DashboardPage = () => {
               <div className={css.dashboard__currency}>
                 <Media query="(min-width:768px)" render={() => <Currency />} />
               </div>
-              <ButtonAddTransactions />
               <Suspense fallback={<Loader />}></Suspense>
             </div>
             <div className={css.dashboard__tab}>
