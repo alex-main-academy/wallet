@@ -1,0 +1,12 @@
+{
+  "1": {
+    "currency": "Currency",
+    "purchase": "Purchase",
+    "sale": "Sale"
+  },
+  "2": {
+    "currency": "Валюта",
+    "purchase": "Купівля",
+    "sale": "Продажа"
+  }
+}

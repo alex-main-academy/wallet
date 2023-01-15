@@ -1,0 +1,20 @@
+{
+  "1": {
+    "add": "Add transaction",
+    "income": "Income",
+    "expense": "Expense",
+    "select": "Select a category",
+    "add_word": "Add",
+    "cancel": "Cancel",
+    "comment": "Comment"
+  },
+  "2": {
+    "add": "Додати транзакцію",
+    "income": "Доходи",
+    "expense": "Витрати",
+    "select": "Вибрати категорію",
+    "add_word": "Додати",
+    "cancel": "Скасувати",
+    "comment": "Коментар"
+  }
+}

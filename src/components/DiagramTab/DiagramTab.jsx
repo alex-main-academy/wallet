@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 import { selectStatistic } from 'redux/transactions/transactionsSelectors';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import translation from 'assets/translation/diagram_tab.json';
+import { translationSelector } from 'redux/translation/translationSelectors';
 
 ChartJS.register(ArcElement, Tooltip);
 
@@ -30,6 +32,7 @@ const monthNumber = [
 ];
 
 const DiagramTab = () => {
+  const language = useSelector(translationSelector);
   const today = new Date();
   const month = today.getMonth();
   const year = today.getFullYear();
@@ -150,7 +153,9 @@ const DiagramTab = () => {
   return (
     <div className={styles.statisticChart}>
       <div className={styles.diagram}>
-        <h1 className={styles.diagramTitle}>Statistics</h1>
+        <h1 className={styles.diagramTitle}>
+          {translation[language].statistics}
+        </h1>
         {visible ? (
           <>
             <Doughnut data={data} />
@@ -173,18 +178,18 @@ const DiagramTab = () => {
             defaultValue={month}
             onChange={onChanged}
           >
-            <option value="january">January</option>
-            <option value="february">February</option>
-            <option value="march">March</option>
-            <option value="april">April</option>
-            <option value="april">May</option>
-            <option value="april">June</option>
-            <option value="july">July</option>
-            <option value="august">August</option>
-            <option value="september">September</option>
-            <option value="november">October</option>
-            <option value="october">November</option>
-            <option value="december">December</option>
+            <option value="january"> {translation[language].months[0]}</option>
+            <option value="february"> {translation[language].months[1]}</option>
+            <option value="march"> {translation[language].months[2]}</option>
+            <option value="april"> {translation[language].months[3]}</option>
+            <option value="april"> {translation[language].months[4]}</option>
+            <option value="april">{translation[language].months[5]}</option>
+            <option value="july"> {translation[language].months[6]}</option>
+            <option value="august"> {translation[language].months[7]}</option>
+            <option value="september">{translation[language].months[8]}</option>
+            <option value="november"> {translation[language].months[9]}</option>
+            <option value="october">{translation[language].months[10]}</option>
+            <option value="december">{translation[language].months[11]}</option>
           </select>
           <select
             className={styles.selectItem}
@@ -210,8 +215,8 @@ const DiagramTab = () => {
         <div className={styles.chart}>
           <div className={styles.title}>
             <div className={styles.titleItem}>
-              <p>Category</p>
-              <p>Sum</p>
+              <p>{translation[language].category}</p>
+              <p>{translation[language].sum}</p>
             </div>
           </div>
           <di></di>
@@ -237,18 +242,22 @@ const DiagramTab = () => {
               ))}
             </ul>
           ) : (
-            <p className={styles.ListEmpty}>List expenses empty</p>
+            <p className={styles.ListEmpty}>{translation[language].list}</p>
           )}
 
           <div className={styles.totalList}>
             <p className={styles.totalListItem}>
-              <span className={styles.result}>Expenses:</span>
+              <span className={styles.result}>
+                {translation[language].expenses}
+              </span>
               <span className={styles.exp}>
                 {Math.abs(dataBASE.expenseSummary)}
               </span>
             </p>
             <p className={styles.totalListItem}>
-              <span className={styles.result}>Income:</span>
+              <span className={styles.result}>
+                {translation[language].income}
+              </span>
               <span className={styles.income}> {dataBASE.incomeSummary}</span>
             </p>
           </div>

@@ -3,12 +3,15 @@ import { MdEmail } from 'react-icons/md';
 import { AiFillLock } from 'react-icons/ai';
 import { userSchema } from './user_validation';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logIn } from 'redux/auth/authOperations';
 import { useAuth } from 'hooks/useAuth';
 import { StyledLink } from './LoginPage.styled';
+import translation from '../../assets/translation/register.json';
+import { translationSelector } from 'redux/translation/translationSelectors';
 
 export default function LoginForm() {
+  const language = useSelector(translationSelector);
   const { error } = useAuth();
   const dispatch = useDispatch();
 
@@ -40,7 +43,9 @@ export default function LoginForm() {
                 src={require('../RegistrationPage/images/icon.png')}
                 alt="wallet"
               />
-              <h2 className={styles.form_title}>Wallet</h2>
+              <h2 className={styles.form_title}>
+                {translation[language].form_title}
+              </h2>
             </div>
 
             <div className={styles.form}>
@@ -48,7 +53,7 @@ export default function LoginForm() {
                 <MdEmail className={styles.ico} />
                 <Field
                   name="email"
-                  placeholder="E-mail"
+                  placeholder={translation[language].email}
                   className={styles.input}
                   type="email"
                 />
@@ -62,7 +67,7 @@ export default function LoginForm() {
                 <AiFillLock className={styles.ico} />
                 <Field
                   name="password"
-                  placeholder="Password"
+                  placeholder={translation[language].password}
                   className={styles.input}
                   type="password"
                 />
@@ -73,10 +78,12 @@ export default function LoginForm() {
                 />
               </div>
               <button className={styles.register_btn} type="submit">
-                Log in
+                {translation[language].login}
               </button>
             </div>
-            <StyledLink to="/registration">Register</StyledLink>
+            <StyledLink to="/registration">
+              {translation[language].register}
+            </StyledLink>
             {error && <p>{error}</p>}
           </div>
         </Form>

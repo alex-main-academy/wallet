@@ -1,0 +1,22 @@
+{
+  "1": {
+    "delete": "Delete",
+    "transactions": "No Transactions",
+    "date": "Date",
+    "type": "Type",
+    "category": "Category",
+    "comment": "Comment",
+    "sum": "Sum",
+    "balance": "Balance"
+  },
+  "2": {
+    "delete": "Видалити",
+    "transactions": "Немає транзакцій",
+    "date": "Дата",
+    "type": "Тип",
+    "category": "Категорія",
+    "comment": "Коментар",
+    "sum": "Сума",
+    "balance": "Баланс"
+  }
+}
