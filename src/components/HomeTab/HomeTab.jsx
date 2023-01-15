@@ -49,7 +49,12 @@ const HomeTab = () => {
                         <tbody>
                           <tr>
                             <td>{translation[language].date}</td>
-                            <td>{el.transactionDate}</td>
+                            <td>
+                              {new Date(el.transactionDate)
+                                .toLocaleDateString()
+                                .split('.')
+                                .join('-')}
+                            </td>
                           </tr>
                           <tr>
                             <td>{translation[language].type}</td>
@@ -67,7 +72,7 @@ const HomeTab = () => {
                           </tr>
                           <tr>
                             <td>{translation[language].comment}</td>
-                            <td>{el.comment}</td>
+                            <td>{el.comment || '-'}</td>
                           </tr>
                           <tr>
                             <td>{translation[language].sum}</td>
@@ -82,7 +87,7 @@ const HomeTab = () => {
                               <button
                                 type="button"
                                 className={s.scrollTableBtnMob}
-                                onClick={() => onDelete(el.id)}
+                                onClick={() => onDelete(el.id, el.amount)}
                               >
                                 {translation[language].delete}
                               </button>
@@ -133,7 +138,12 @@ const HomeTab = () => {
                         )
                         .map(el => (
                           <tr key={el.id}>
-                            <td>{el.transactionDate}</td>
+                            <td>
+                              {new Date(el.transactionDate)
+                                .toLocaleDateString()
+                                .split('.')
+                                .join('-')}
+                            </td>
                             <td>{el.type !== 'EXPENSE' ? '+' : '-'}</td>
                             <td>
                               {categoriesList.length &&
@@ -141,7 +151,7 @@ const HomeTab = () => {
                                   cat => cat.id === el.categoryId
                                 ).name}
                             </td>
-                            <td>{el.comment}</td>
+                            <td>{el.comment || '-'}</td>
                             <td
                               className={
                                 el.amount > 0 ? s.positive : s.negative
