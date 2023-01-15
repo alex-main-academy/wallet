@@ -1,5 +1,9 @@
 import css from './ModalAddTransaction.module.css';
-import Datetime from 'react-datetime';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { transactionSchema } from './transaction_validation';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Select from 'react-select';
 import 'react-datetime/css/react-datetime.css';
 import calendar from './images/calendar.svg';
 import modalCloseIcon from './images/close.svg';
@@ -10,82 +14,79 @@ import { fetchTransactionCategories } from 'redux/transactions/transactionsOpera
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectTransactionCategories } from 'redux/transactions/transactionsSelectors';
-import { formatDate } from 'helpers/formatDate';
-import moment from 'moment';
-import translation from 'assets/translation/add_transaction.json';
-import { translationSelector } from 'redux/translation/translationSelectors';
+import { refreshUser } from 'redux/auth/authOperations';
+import FormikDateTime from './FormicDatetime';
 
 const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
-  const language = useSelector(translationSelector);
-  const [valueDate, onChange] = useState(new Date());
-  const [transactionDate, setTransactionDate] = useState(
-    formatDate(moment(valueDate).format())
-  );
-  const [amount, setAmount] = useState('');
-  const [comment, setComment] = useState('');
   const [type, setType] = useState('EXPENSE');
-  const [categoryId, setCategoryId] = useState('');
   const [isToggled, setIsToggled] = useState(false);
-
   const dispatch = useDispatch();
   const categories = useSelector(selectTransactionCategories);
 
-  const onToggle = () => {
+  const initialValue = {
+    type: 'EXPENSE',
+    amount: '',
+    categoryId: '',
+    transactionDate: new Date(),
+    comment: '',
+  };
+  const onToggle = (setFieldValue, resetForm, values) => {
     setIsToggled(!isToggled);
-    if (isToggled) {
-      setType('EXPENSE');
+    console.log(values.target.checked);
+    if (values.target.checked) {
+      setType(type);
     } else {
       setType('INCOME');
-      setCategoryId('063f1132-ba5d-42b4-951d-44011ca46262');
     }
+
+    resetForm();
+    return setFieldValue('type', values.target.checked ? 'INCOME' : 'EXPENSE');
   };
 
   useEffect(() => {
     dispatch(fetchTransactionCategories());
   }, [dispatch]);
 
-  const handleNameChange = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'amount':
-        setAmount(parseInt(value));
-        break;
+  const handlerSubmit = async ({
+    transactionDate,
+    type,
+    categoryId,
+    comment,
+    amount,
+  }) => {
+    const correctAmmount = type === 'EXPENSE' ? Number('-' + amount) : amount;
 
-      case 'transactionDate':
-        setTransactionDate(value);
-        break;
-
-      case 'comment':
-        setComment(value);
-        break;
-
-      case 'categoryId':
-        setCategoryId(value);
-        break;
-
-      default:
-        return;
+    try {
+      await dispatch(
+        addTransaction({
+          transactionDate: new Date(transactionDate),
+          type,
+          categoryId:
+            type === 'INCOME'
+              ? '063f1132-ba5d-42b4-951d-44011ca46262'
+              : categoryId,
+          comment,
+          amount: correctAmmount,
+        })
+      ).unwrap();
+      onClose();
+    } catch (error) {
+      toast.error('Something went wrong. Please try again.');
     }
+
+    dispatch(refreshUser());
   };
 
-  const handlerSubmit = e => {
+  function validateSelect(value) {
+    let error;
+    console.log(value);
+    if (!value) {
+      error = 'category is a required field';
+    }
+    return error;
+  }
+  const handleCancel = e => {
     e.preventDefault();
-    const correctAmmount = type === 'EXPENSE' ? Number('-' + amount) : amount;
-    dispatch(
-      addTransaction({
-        transactionDate,
-        type,
-        categoryId,
-        comment,
-        amount: correctAmmount,
-      })
-    );
-
-    setTransactionDate(new Date());
-    setType('EXPENSE');
-    setCategoryId('');
-    setComment('');
-    setAmount('');
   };
 
   return (
@@ -98,99 +99,147 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
             alt="close"
           />
         </button>
-        <h2 className={css.modalTitle}>{translation[language].add}</h2>
-        <form className={css.modalForm} onSubmit={handlerSubmit}>
-          <div className={css.modalWrappenTransaction}>
-            {isToggled ? (
-              <p className={css.activeTransactionIncome}>
-                {translation[language].income}
-              </p>
-            ) : (
-              <p className={css.modalTransactionIncome}>
-                {translation[language].income}
-              </p>
-            )}
-            <label className={css.toggleSwitch}>
-              <input
-                type="checkbox"
-                value={type}
-                checked={isToggled}
-                onChange={onToggle}
+        <h2 className={css.modalTitle}>Add transaction</h2>
+        <Formik
+          initialValues={initialValue}
+          validationSchema={transactionSchema}
+          onSubmit={(values, { resetForm }) => {
+            handlerSubmit(values);
+            resetForm();
+          }}
+        >
+          {formik => (
+            <Form>
+              <div className={css.modalWrappenTransaction}>
+                {isToggled ? (
+                  <p className={css.activeTransactionIncome}>Income</p>
+                ) : (
+                  <p className={css.modalTransactionIncome}>Income</p>
+                )}
+                <label className={css.toggleSwitch}>
+                  <Field
+                    type="checkbox"
+                    name="type"
+                    checked={isToggled}
+                    onChange={values =>
+                      onToggle(formik.setFieldValue, formik.resetForm, values)
+                    }
+                  />
+                  <span className={css.switch} />
+                </label>
+                {isToggled ? (
+                  <p className={css.modalTransactionExpense}>Expense</p>
+                ) : (
+                  <p className={css.activeTransactionExpense}>Expense</p>
+                )}
+              </div>
+              {!isToggled && (
+                <div>
+                  <Field name="categoryId" validate={validateSelect}>
+                    {({ field, form }) => (
+                      <Select
+                        onChange={selectedOption =>
+                          form.setFieldValue('categoryId', selectedOption.value)
+                        }
+                        className={css.modalSelect}
+                        placeholder={
+                          <div className={css.selectPlaceholderText}>
+                            Select a category
+                          </div>
+                        }
+                        options={categories
+                          .filter(
+                            category => category.type === form.values.type
+                          )
+                          .map(category => ({
+                            value: category.id,
+                            label: category.name,
+                          }))}
+                        theme={theme => ({
+                          ...theme,
+
+                          background: 'rgba(255, 255, 255, 0.7)',
+                          boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.1)',
+                          colors: {
+                            ...theme.colors,
+                            text: '#FF6596',
+                            primary25: 'white',
+                            primary: '#FF6596',
+                          },
+                        })}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            border: 'none',
+                            borderBottom: ' 1px solid #e0e0e0',
+                            outline: 'none',
+                          }),
+                        }}
+                      />
+                    )}
+                  </Field>
+                  <ErrorMessage
+                    name="categoryId"
+                    component="div"
+                    className={css.invalidFeedbackSelect}
+                  />
+                </div>
+              )}
+
+              <div className={css.modalWrapper}>
+                <Field
+                  className={css.formInputSum}
+                  type="number"
+                  name="amount"
+                  placeholder="0.00"
+                />
+                <ErrorMessage
+                  name="amount"
+                  component="div"
+                  className={css.invalidFeedback}
+                />
+                <div className={css.inputDatetime}>
+                  <Field
+                    name="transactionDate"
+                    timeFormat={false}
+                    component={FormikDateTime}
+                  />
+                  <ErrorMessage
+                    name="transactionDate"
+                    component="div"
+                    className={css.invalidFeedbackDate}
+                  />
+                  <img
+                    className={css.calendarIcon}
+                    src={calendar}
+                    alt="calendar"
+                  />
+                </div>
+              </div>
+              <Field
+                className={css.inputCommentText}
+                type="text"
+                name="comment"
+                placeholder="Comment"
               />
-              <span className={css.switch} />
-            </label>
-            {isToggled ? (
-              <p className={css.modalTransactionExpense}>
-                {translation[language].expense}
-              </p>
-            ) : (
-              <p className={css.activeTransactionExpense}>
-                {translation[language].expense}
-              </p>
-            )}
-          </div>
-          {!isToggled && (
-            <select
-              className={css.modalSelect}
-              name="categoryId"
-              defaultValue="Select a category"
-              onChange={handleNameChange}
-            >
-              <option disabled hidden>
-                {translation[language].select}
-              </option>
-              {categories
-                .filter(category => category.type === type)
-                .map(category => (
-                  <option
-                    className={css.categoriesSelect}
-                    key={category.id}
-                    value={category.id}
-                  >
-                    {category.name}
-                  </option>
-                ))}
-            </select>
-          )}
-          <div className={css.modalWrapper}>
-            <input
-              className={css.formInputSum}
-              type="number"
-              name="amount"
-              value={amount}
-              onChange={handleNameChange}
-              placeholder="0.00"
-            />
-            <div className={css.inputDatetime}>
-              <Datetime
-                dateFormat="YYYY.MM.DD"
-                timeFormat={false}
-                name="transactionDate"
-                value={valueDate}
-                onChange={onChange}
-                onClose={value =>
-                  setTransactionDate(formatDate(moment(value).format()))
+              <button
+                className={css.btnAdd}
+                type="submit"
+                onClick={() =>
+                  !isToggled ? formik.validateField('categoryId') : null
                 }
-              />
-              <img className={css.calendarIcon} src={calendar} alt="calendar" />
-            </div>
-          </div>
-          <input
-            className={css.inputCommentText}
-            type="text"
-            name="comment"
-            value={comment}
-            onChange={handleNameChange}
-            placeholder={translation[language].comment}
-          />
-          <button className={css.btnAdd}>
-            {translation[language].add_word}
-          </button>
-          <button className={css.btnCancel}>
-            {translation[language].cancel}
-          </button>
-        </form>
+              >
+                Add
+              </button>
+            </Form>
+          )}
+        </Formik>
+
+        <button className={css.btnCancel} type="submit" onClick={handleCancel}>
+          Cancel
+        </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };

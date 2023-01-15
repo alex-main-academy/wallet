@@ -148,26 +148,32 @@
   color: var(--gray-text-color);
 }
 
-.modalSelect {
-  width: 100%;
-  margin-bottom: 40px;
+.selectPlaceholderText {
   font-family: var(--primary-font);
   font-size: 18px;
   line-height: 1.5;
-  cursor: pointer;
-  padding: 8px 10px;
-  outline: transparent;
-  border: none;
-  border-bottom: 1px solid #e0e0e0;
   color: var(--gray-text-color);
 }
 
+.modalSelect {
+  position: relative;
+}
+.invalidFeedbackSelect {
+  position: absolute;
+  color: red;
+  font-size: 0.9rem;
+  top: 30%;
+  left: 23%;
+}
+
 .formInputSum {
+  width: 100%;
   font-family: var(--primary-font);
   font-size: 18px;
   line-height: 1.5;
   font-weight: 700;
   padding: 8px 10px;
+  margin-top: 40px;
   outline: transparent;
   border: none;
   border-bottom: 1px solid #e0e0e0;
@@ -176,6 +182,12 @@
 input {
   outline: none;
   border: none;
+  font-family: var(--primary-font);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  color: var(--primary-text-color);
 }
 
 .inputDatetime {
@@ -183,14 +195,16 @@ input {
   padding: 8px 10px;
   outline: none;
   border: none;
+  margin-top: 40px;
   border-bottom: 1px solid #e0e0e0;
 
 }
 
+
 .calendarIcon {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 8px;
+  right: 20px;
   width: 24px;
   height: 24px;
 }
@@ -250,6 +264,28 @@ input {
   padding: 13px 65px 13px 71px;
 }
 
+.modalWrapper {
+position: relative;
+}
+
+.invalidFeedback {
+  position: absolute;
+  color: red;
+  font-size: 0.9rem;
+  top: 85px;
+  left: 68px;
+}
+
+
+.invalidFeedbackDate {
+  position: absolute;
+  color: red;
+  font-size: 0.9rem;
+  top: 50px;
+  left: 27px;
+}
+
+
 @media screen and (min-width: 767px) {
   .modal {
     max-width: 540px;
@@ -269,7 +305,7 @@ input {
   }
 
   .inputDatetime {
-    width: 181px;
+    width: 41%;
   }
 
   .modalWrapper {
@@ -281,4 +317,22 @@ input {
   .inputCommentText {
     height: 32px;
   }
+  .invalidFeedbackSelect {
+    top: 41%;
+    left: 33%;
+  }
+
+  .invalidFeedback {
+    top: 90px;
+    left: 17px;
+  }
+
+  .invalidFeedbackDate {
+    position: absolute;
+    color: red;
+    font-size: 0.9rem;
+    top: 50px;
+    left: 40px;
+  }
+
 }
