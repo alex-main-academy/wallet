@@ -1,7 +1,7 @@
 import Datetime from 'react-datetime';
 import moment from 'moment';
 
-const DATE_FORMAT = 'YYYY-MM-DD';
+const DATE_FORMAT = 'MM.DD.YYYY';
 
 const FormikDateTime = ({ field, form, timeFormat }) => {
   const onFieldChange = value => {
@@ -15,18 +15,22 @@ const FormikDateTime = ({ field, form, timeFormat }) => {
   };
 
   const onFieldBlur = () => {
-    form.setFieldTouched(field.name, true);
+    form.setFieldTouched(field.name,true);
   };
+
+
+
 
   return (
     <Datetime
       dateFormat={DATE_FORMAT}
       timeFormat={timeFormat}
       id={field.name}
-      initialValue={new Date()}
+      initialValue={moment()}
       name={field.name}
       onChange={onFieldChange}
       onBlur={onFieldBlur}
+
     />
   );
 };
