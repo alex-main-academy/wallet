@@ -10,6 +10,8 @@ const ButtonAddTransactions = () => {
   useEffect(() => {
     if (isModalAddTransactionOpen) {
       document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'visible';
     }
   }, [isModalAddTransactionOpen]);
 
@@ -20,7 +22,7 @@ const ButtonAddTransactions = () => {
 
   const handleClickClose = () => {
     setIsModalAddTransactionOpen(false);
-    
+
   };
 
   const handleBackdrop = e => {
