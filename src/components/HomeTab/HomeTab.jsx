@@ -8,6 +8,7 @@ import s from './HomeTab.module.css';
 import { changeBalance } from 'redux/auth/authSlice';
 import translation from 'assets/translation/home_tab.json';
 import { translationSelector } from 'redux/translation/translationSelectors';
+import ButtonAddTransactions from 'components/ButtonAddTransactions/ButtonAddTransactions';
 
 const HomeTab = () => {
   const language = useSelector(translationSelector);
@@ -97,6 +98,7 @@ const HomeTab = () => {
                 )}
               </div>
             </div>
+            <ButtonAddTransactions />
           </div>
         )}
       />
@@ -168,6 +170,7 @@ const HomeTab = () => {
                 </table>
               </div>
             </div>
+            <ButtonAddTransactions />
           </div>
         )}
       />
