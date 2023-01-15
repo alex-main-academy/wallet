@@ -209,7 +209,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
                   <ErrorMessage
                     name="transactionDate"
                     component="div"
-                    className={css.invalidFeedback}
+                    className={css.invalidFeedbackDate}
                   />
                   <img
                     className={css.calendarIcon}

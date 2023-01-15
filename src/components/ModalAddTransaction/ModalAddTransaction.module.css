@@ -277,6 +277,14 @@ position: relative;
 }
 
 
+.invalidFeedbackDate {
+  position: absolute;
+  color: red;
+  font-size: 0.9rem;
+  top: 50px;
+  left: 27px;
+}
+
 @media screen and (min-width: 767px) {
   .modal {
     max-width: 540px;
@@ -318,5 +326,12 @@ position: relative;
     left: 17px;
   }
 
+  .invalidFeedbackDate {
+    position: absolute;
+    color: red;
+    font-size: 0.9rem;
+    top: 50px;
+    left: 40px;
+  }
 
 }
