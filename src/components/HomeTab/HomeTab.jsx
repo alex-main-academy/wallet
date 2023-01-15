@@ -98,6 +98,7 @@ const HomeTab = () => {
                 )}
               </div>
             </div>
+            <ButtonAddTransactions />
           </div>
         )}
       />
@@ -169,7 +170,7 @@ const HomeTab = () => {
                 </table>
               </div>
             </div>
-            <ButtonAddTransactions/>
+            <ButtonAddTransactions />
           </div>
         )}
       />
