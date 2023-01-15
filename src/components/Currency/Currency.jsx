@@ -2,9 +2,13 @@ import styles from './Currency.module.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Circles } from 'react-loader-spinner';
+import translation from 'assets/translation/currency.json';
+import { translationSelector } from 'redux/translation/translationSelectors';
+import { useSelector } from 'react-redux';
 
 export const Currency = () => {
   const [currency, setCurrency] = useState([]);
+  const language = useSelector(translationSelector);
 
   useEffect(() => {
     const date = new Date();
@@ -46,9 +50,13 @@ export const Currency = () => {
       <table className={styles.table}>
         <tbody>
           <tr className={styles.tableHead}>
-            <td className={styles.currency}>Currency</td>
-            <td className={styles.purchase}>Purchase</td>
-            <td className={styles.sale}>Sale</td>
+            <td className={styles.currency}>
+              {translation[language].currency}
+            </td>
+            <td className={styles.purchase}>
+              {translation[language].purchase}
+            </td>
+            <td className={styles.sale}>{translation[language].sale}</td>
           </tr>
         </tbody>
         <tbody className={styles.tableBody}>
