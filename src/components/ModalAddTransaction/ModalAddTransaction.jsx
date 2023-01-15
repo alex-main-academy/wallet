@@ -87,7 +87,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
   }
   const handleCancel = e => {
     e.preventDefault();
-    console.log('click');
   };
 
   return (
@@ -106,7 +105,6 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
           validationSchema={transactionSchema}
           onSubmit={(values, { resetForm }) => {
             handlerSubmit(values);
-            console.log(values);
             resetForm();
           }}
         >
@@ -159,6 +157,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
                           }))}
                         theme={theme => ({
                           ...theme,
+
                           background: 'rgba(255, 255, 255, 0.7)',
                           boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.1)',
                           colors: {
@@ -236,7 +235,7 @@ const ModalAddTransaction = ({ onClose, onClickBackdrop }) => {
           )}
         </Formik>
 
-        <button className={css.btnCancel} type="reset" onClick={handleCancel}>
+        <button className={css.btnCancel} type="submit" onClick={handleCancel}>
           Cancel
         </button>
       </div>

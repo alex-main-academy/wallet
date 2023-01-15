@@ -1,0 +1,12 @@
+{
+  "1": {
+    "prompt": "Do you really want to exit?",
+    "exit": "Exit",
+    "cancel": "Cancel"
+  },
+  "2": {
+    "prompt": "Ви дійсно хочете вийти?",
+    "exit": "Вийти",
+    "cancel": "Скасувати"
+  }
+}
