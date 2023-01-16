@@ -17,6 +17,13 @@
   background-image: url('../Currency/currencyImages/wave.png');
   background-position: bottom;
   background-size: contain;
+  transition-duration: 0.8s;
+  cursor: pointer;
+}
+
+.table:hover,
+.table:focus {
+  transform: scale(1.05);
 }
 
 .tableBody {

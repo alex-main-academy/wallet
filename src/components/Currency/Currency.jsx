@@ -59,8 +59,8 @@ export const Currency = () => {
 
         <tr className={styles.tableValues}>
           <td>EUR</td>
-          <td>{currency[1].rateSell.toFixed(2)}</td>
           <td>{currency[1].rateBuy.toFixed(2)}</td>
+          <td>{currency[1].rateSell.toFixed(2)}</td>
         </tr>
       </tbody>
     </table>
