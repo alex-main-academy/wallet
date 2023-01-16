@@ -1,0 +1,46 @@
+{
+  "1": {
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "category": "Category",
+    "sum": "Sum",
+    "list": "List expenses empty",
+    "expenses": "Expenses:",
+    "income": "Income:",
+    "statistics": "Statistics"
+  },
+  "2": {
+    "months": [
+      "Січень",
+      "Лютий",
+      "Березень",
+      "Квітень",
+      "Травень",
+      "Червень",
+      "Липень",
+      "Серпень",
+      "Вересень",
+      "Жовтень",
+      "Листопад",
+      "Грудень"
+    ],
+    "category": "Категорія",
+    "sum": "Сума",
+    "list": "Список витрат пустий",
+    "expenses": "Витрати:",
+    "income": "Доходи:",
+    "statistics": "Статистика"
+  }
+}

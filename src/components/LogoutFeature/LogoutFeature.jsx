@@ -1,11 +1,14 @@
 import styles from './LogoutFeature.module.css';
 import React from 'react';
 import { logOut } from 'redux/auth/authOperations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import exitIcon from './images/exit-icon.png';
+import translation from 'assets/translation/logout_feature.json';
+import { translationSelector } from 'redux/translation/translationSelectors';
 
 export default function LogoutFeature() {
+  const language = useSelector(translationSelector);
   const dispatch = useDispatch(logOut);
   const [modalShown, setModalShown] = useState(false);
 
@@ -16,12 +19,12 @@ export default function LogoutFeature() {
     <>
       <button onClick={handleClick} className={styles.logout_btn} type="button">
         <img src={exitIcon} alt="icon" />
-        <span className={styles.btn_text}>Exit</span>
+        <span className={styles.btn_text}> {translation[language].exit}</span>
       </button>
       {modalShown && (
         <div className={styles.backdrop}>
           <div className={styles.modal}>
-            <p>Do you really want to exit?</p>
+            <p> {translation[language].prompt}</p>
 
             <button
               onClick={() => setModalShown(false)}
@@ -34,7 +37,7 @@ export default function LogoutFeature() {
               }}
               type="button"
             >
-              Cancel
+              {translation[language].cancel}
             </button>
             <button
               onClick={() => {
@@ -45,7 +48,7 @@ export default function LogoutFeature() {
               className={styles.modal_btn}
               type="button"
             >
-              Exit
+              {translation[language].exit}
             </button>
           </div>
         </div>

@@ -7,11 +7,14 @@ import PasswordStrengthMeter from './PasswordStrengthMeter';
 import { userSchema } from './user_validation';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { register } from 'redux/auth/authOperations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from 'hooks/useAuth';
 import { StyledLink } from './RegPage.styled';
+import translation from '../../assets/translation/register.json';
+import { translationSelector } from 'redux/translation/translationSelectors';
 
 export default function RegForm() {
+  const language = useSelector(translationSelector);
   const dispatch = useDispatch();
   const { error } = useAuth();
 
@@ -51,7 +54,9 @@ export default function RegForm() {
                 src={require('./images/icon.png')}
                 alt="wallet"
               />
-              <h2 className={styles.form_title}>Wallet</h2>
+              <h2 className={styles.form_title}>
+                {translation[language].form_title}
+              </h2>
             </div>
 
             <div className={styles.form}>
@@ -59,7 +64,7 @@ export default function RegForm() {
                 <MdEmail className={styles.ico} />
                 <Field
                   name="email"
-                  placeholder="E-mail"
+                  placeholder={translation[language].email}
                   className={styles.input}
                   type="email"
                 />
@@ -73,7 +78,7 @@ export default function RegForm() {
                 <AiFillLock className={styles.ico} />
                 <Field
                   name="password"
-                  placeholder="Password"
+                  placeholder={translation[language].password}
                   className={styles.input}
                   type="password"
                 />
@@ -89,7 +94,7 @@ export default function RegForm() {
                 <AiFillLock className={styles.ico} />
                 <Field
                   name="confirm_password"
-                  placeholder="Confirm password"
+                  placeholder={translation[language].confirm_password}
                   className={styles.input}
                   type="password"
                 />
@@ -103,7 +108,7 @@ export default function RegForm() {
                 <BsPersonFill className={styles.ico} />
                 <Field
                   name="name"
-                  placeholder="First name "
+                  placeholder={translation[language].name}
                   className={styles.input}
                   type="text"
                 />
@@ -114,10 +119,10 @@ export default function RegForm() {
                 />
               </div>
               <button className={styles.register_btn} type="submit">
-                Register
+                {translation[language].register}
               </button>
             </div>
-            <StyledLink to="/">Log in</StyledLink>
+            <StyledLink to="/"> {translation[language].login}</StyledLink>
             {error && <p>{error}</p>}
           </div>
         </Form>

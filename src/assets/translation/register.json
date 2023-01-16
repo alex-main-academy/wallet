@@ -1,0 +1,22 @@
+{
+  "1": {
+    "title": "Finance App",
+    "form_title": "Wallet",
+    "email": "E-mail",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "name": "First name ",
+    "register": "Register",
+    "login": "Log in"
+  },
+  "2": {
+    "title": "Фінансовий додаток",
+    "form_title": "Гаманець",
+    "email": "Eмейл",
+    "password": "Пароль",
+    "confirm_password": "Підтвердіть пароль",
+    "name": "Імʼя",
+    "register": "Зареєструватись",
+    "login": "Увійти"
+  }
+}

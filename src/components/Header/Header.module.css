@@ -1,76 +1,79 @@
 .header {
-    background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .header__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header__logo {
-    padding: 20px 0;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-@media screen and (max-width:768px) {
-    .header__logo {
-        padding: 15px 0;
-        gap: 15.5px;
-    }
+@media screen and (max-width: 768px) {
+  .header__logo {
+    padding: 15px 0;
+    gap: 15.5px;
+  }
 }
 
 .header__logo__icon {
-    display: block;
+  display: block;
 }
 
-@media screen and (max-width:768px) {
-    .header__logo__icon {
-        width: 30px;
-        height: 30px;
-    }
+@media screen and (max-width: 768px) {
+  .header__logo__icon {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .header__logo__text {
-    display: block;
-    font-size: 30px;
-    font-family: var(--secondary-font);
-    font-weight: 700;
-    color: var(--primary-text-color);
+  display: block;
+  font-size: 30px;
+  font-family: var(--secondary-font);
+  font-weight: 700;
+  color: var(--primary-text-color);
 }
 
-@media screen and (max-width:768px) {
-    .header__logo__text {
-        font-size: 24px;
-    }
+@media screen and (max-width: 768px) {
+  .header__logo__text {
+    font-size: 24px;
+  }
 }
 
 .header__menu {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: column;
 }
 
-@media screen and (max-width:768px) {
-    .header__menu {
-        gap: 8px;
-    }
+@media screen and (max-width: 768px) {
+  .header__menu {
+    gap: 8px;
+  }
 }
 
 .header__menu__name {
-    display: block;
-    padding: 0 12px 0 0;
-    color: var(--gray-text-color);
-    border-right: 1px solid var(--gray-text-color);
-    font-size: 18px;
-    line-height: 1.4;
+  display: block;
+  padding: 0 12px 0 0;
+  color: var(--gray-text-color);
+  border-right: 1px solid var(--gray-text-color);
+  font-size: 18px;
+  line-height: 1.4;
 }
 
-@media screen and (max-width:768px) {
-    .header__menu__name {
-        padding: 0;
-        border: none;
-    }
+@media screen and (max-width: 768px) {
+  .header__menu__name {
+    padding: 0;
+    border: none;
+  }
+  .header__menu {
+  }
 }

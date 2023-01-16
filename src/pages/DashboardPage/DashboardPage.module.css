@@ -11,7 +11,7 @@
 @media screen and (max-width:1280px) {
     .dashboard {
         background-position: bottom left, top right -200px;
-        height: 100vh;
+        height: auto;
     }
 }
 
@@ -30,7 +30,7 @@
 
 @media screen and (max-width:1280px) {
     .dashboard__wrapper {
-        height: 100vh;
+        height: auto;
         padding-bottom: 20px;
     }
 }
@@ -67,13 +67,22 @@
         height: auto;
         border: none;
         box-shadow: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .dashboard__nav {
+        display: block;
     }
 }
 
 
 .dashboard__tab {
     padding: 0;
-    height: 100%;
+    height: auto;
 }
 
 @media screen and (max-width:1280px) {
