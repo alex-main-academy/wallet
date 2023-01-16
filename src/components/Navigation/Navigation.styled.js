@@ -7,7 +7,6 @@ export const StyledLink = styled(NavLink)`
   gap: 23px;
   font-size: 18px;
   color: var(--primary-text-color);
-  font-family: var(--secondary-font);
   font-weight: 400;
 
   &.active {

@@ -4,6 +4,7 @@
   right: calc(50% - 624px);
   z-index: 1;
 }
+
 .btn {
   border: none;
   background-color: transparent;
@@ -11,15 +12,19 @@
   font-size: 18px;
   line-height: 1.2;
   font-family: var(--primary-font);
+  cursor: pointer;
 }
+
 .btn:first-child {
   border-right: 1px solid var(--gray-text-color);
 }
+
 @media screen and (max-width: 1279px) {
   .wrapper {
     right: calc(50% - 352px);
   }
 }
+
 @media screen and (max-width: 767px) {
   .wrapper {
     position: static;
