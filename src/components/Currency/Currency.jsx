@@ -46,28 +46,34 @@ export const Currency = () => {
   }, [currency.length]);
 
   return currency.length ? (
-    <table className={styles.table}>
-      <tbody>
-        <tr className={styles.tableHead}>
-          <td className={styles.currency}>{translation[language].currency}</td>
-          <td className={styles.purchase}>{translation[language].purchase}</td>
-          <td className={styles.sale}>{translation[language].sale}</td>
-        </tr>
-      </tbody>
-      <tbody className={styles.tableBody}>
-        <tr className={styles.tableValues}>
-          <td>USD</td>
-          <td>{currency[0].rateBuy.toFixed(2)}</td>
-          <td>{currency[0].rateSell.toFixed(2)}</td>
-        </tr>
+    <div className={styles.currency__wrapper}>
+      <table className={styles.table}>
+        <tbody>
+          <tr className={styles.tableHead}>
+            <td className={styles.currency}>
+              {translation[language].currency}
+            </td>
+            <td className={styles.purchase}>
+              {translation[language].purchase}
+            </td>
+            <td className={styles.sale}>{translation[language].sale}</td>
+          </tr>
+        </tbody>
+        <tbody className={styles.tableBody}>
+          <tr className={styles.tableValues}>
+            <td>USD</td>
+            <td>{currency[0].rateBuy.toFixed(2)}</td>
+            <td>{currency[0].rateSell.toFixed(2)}</td>
+          </tr>
 
-        <tr className={styles.tableValues}>
-          <td>EUR</td>
-          <td>{currency[1].rateBuy.toFixed(2)}</td>
-          <td>{currency[1].rateSell.toFixed(2)}</td>
-        </tr>
-      </tbody>
-    </table>
+          <tr className={styles.tableValues}>
+            <td>EUR</td>
+            <td>{currency[1].rateBuy.toFixed(2)}</td>
+            <td>{currency[1].rateSell.toFixed(2)}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   ) : (
     <div>
       <Circles
